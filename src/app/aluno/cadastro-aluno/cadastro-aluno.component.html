@@ -1,0 +1,33 @@
+<div class="p-grid">
+    <div class="p-col-6 p-md-6 p-lg-3">
+      <span class="p-float-label">
+          <input id="nome" type="text" pInputText [(ngModel)]="usuario.nome">
+          <label for="nome">Nome</label>
+      </span>
+    </div>
+    <div class="p-col-6 p-md-6 p-lg-3">
+      <span class="p-float-label">
+          <input id="email" type="text" pInputText [(ngModel)]="usuario.email">
+          <label for="email">Email</label>
+      </span>
+    </div>
+    <div class="p-col-6 p-md-6 p-lg-3">
+        <span class="p-float-label">
+          <input id="usuario" type="text" pInputText [(ngModel)]="usuario.usuario">
+          <label for="usuario">Usuário</label>
+      </span>
+    </div>
+    <div class="p-col-6 p-md-6 p-lg-3">
+      <span class="p-float-label">
+          <input id="senha" type="text" pInputText [(ngModel)]="usuario.senha">
+          <label for="senha">Senha</label>
+      </span>
+    </div>
+
+    <div class="p-col-12 p-md-6 p-lg-3">
+      <p-button (click)="save()">Salvar</p-button>
+    </div>
+  <div class="p-col-12 p-md-6 p-lg-3" *ngIf="result">
+    {{ result }}
+  </div>
+</div>
