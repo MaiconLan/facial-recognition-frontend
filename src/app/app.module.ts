@@ -9,6 +9,8 @@ import {ButtonModule} from 'primeng/button';
 import {TableModule} from 'primeng/table';
 import {BrowserModule} from '@angular/platform-browser';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {TooltipModule} from 'primeng/tooltip';
+import { NavbarComponent } from './navbar/navbar.component';
 
 
 
@@ -16,7 +18,8 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
   declarations: [
     AppComponent,
     ListaAlunoComponent,
-    CadastroAlunoComponent
+    CadastroAlunoComponent,
+    NavbarComponent
   ],
   imports: [
     BrowserModule,
@@ -26,6 +29,7 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
     TableModule,
     BrowserModule,
     BrowserAnimationsModule,
+    TooltipModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

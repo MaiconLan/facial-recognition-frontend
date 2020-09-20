@@ -22,9 +22,14 @@
 
   <div class="p-grid">
     <div class="p-col-12 p-md-12 p-lg-12">
-      <p-table [value]="alunos" [loading]="loading">
+      <p-table [value]="alunos" [loading]="loading" [paginator]="true" [rows]="10" [showCurrentPageReport]="true"
+               currentPageReportTemplate="{first} de {last} em um total de {totalRecords} registros"
+               [rowsPerPageOptions]="[10,25,50]"
+                [responsive]="true">
         <ng-template pTemplate="caption">
-          Lista de alunos
+          <div style="text-align: center">
+            Lista de alunos
+          </div>
         </ng-template>
 
         <ng-template pTemplate="header">
@@ -44,8 +49,10 @@
             <td>{{aluno.matricula}}</td>
             <td>{{aluno.email}}</td>
             <td>
-              <a pButton icon="pi pi-pencil" class="botao-editar p-button-rounded"></a>
-              <button pButton icon="pi pi-trash" class="botao-excluir p-button-danger p-button-rounded"></button>
+              <a pButton pTooltip="Editar" tooltipPosition="top" icon="pi pi-pencil"
+                 class="botao-editar p-button-rounded"></a>
+              <button pButton pTooltip="Excluir" tooltipPosition="top" icon="pi pi-trash"
+                      class="botao-excluir p-button-danger p-button-rounded"></button>
             </td>
           </tr>
         </ng-template>
