@@ -1,8 +1,6 @@
 import {NgModule} from '@angular/core';
 
 import {AppComponent} from './app.component';
-import {ListaAlunoComponent} from './aluno/lista-aluno/lista-aluno.component';
-import {CadastroAlunoComponent} from './aluno/cadastro-aluno/cadastro-aluno.component';
 import {FormsModule} from '@angular/forms';
 import {MessageModule} from 'primeng/message';
 import {ButtonModule} from 'primeng/button';
@@ -11,17 +9,17 @@ import {BrowserModule} from '@angular/platform-browser';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {TooltipModule} from 'primeng/tooltip';
 import {NavbarComponent} from './navbar/navbar.component';
-import {ListaProfessorComponent} from './professor/lista-professor/lista-professor.component';
 import {InputTextModule} from 'primeng/inputtext';
 import {PasswordModule} from 'primeng/password';
+import {SelectButtonModule} from 'primeng/selectbutton';
+import {MessageComponent} from './message/message.component';
+import {AlunoModule} from './aluno/aluno.module';
 
 @NgModule({
   declarations: [
     AppComponent,
-    ListaAlunoComponent,
-    CadastroAlunoComponent,
     NavbarComponent,
-    ListaProfessorComponent
+    MessageComponent
   ],
   imports: [
     BrowserModule,
@@ -34,6 +32,8 @@ import {PasswordModule} from 'primeng/password';
     TooltipModule,
     InputTextModule,
     PasswordModule,
+    SelectButtonModule,
+    AlunoModule
   ],
   providers: [],
   bootstrap: [AppComponent]

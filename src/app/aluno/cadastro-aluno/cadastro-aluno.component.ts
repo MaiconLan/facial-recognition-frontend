@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 
 
 @Component({
@@ -10,8 +10,14 @@ export class CadastroAlunoComponent implements OnInit {
 
   usuario = new Usuario();
   result = new Usuario();
-  constructor() { }
 
+  status = [
+    {label: 'Ativo', value: true},
+    {label: 'Inativo', value: false},
+  ];
+
+  constructor() {
+  }
 
   ngOnInit(): void {
   }
