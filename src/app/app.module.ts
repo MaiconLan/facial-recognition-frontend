@@ -10,16 +10,18 @@ import {TableModule} from 'primeng/table';
 import {BrowserModule} from '@angular/platform-browser';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {TooltipModule} from 'primeng/tooltip';
-import { NavbarComponent } from './navbar/navbar.component';
-
-
+import {NavbarComponent} from './navbar/navbar.component';
+import {ListaProfessorComponent} from './professor/lista-professor/lista-professor.component';
+import {InputTextModule} from 'primeng/inputtext';
+import {PasswordModule} from 'primeng/password';
 
 @NgModule({
   declarations: [
     AppComponent,
     ListaAlunoComponent,
     CadastroAlunoComponent,
-    NavbarComponent
+    NavbarComponent,
+    ListaProfessorComponent
   ],
   imports: [
     BrowserModule,
@@ -30,8 +32,11 @@ import { NavbarComponent } from './navbar/navbar.component';
     BrowserModule,
     BrowserAnimationsModule,
     TooltipModule,
+    InputTextModule,
+    PasswordModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+}
