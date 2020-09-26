@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {AlunoService} from '../aluno.service';
 
 @Component({
   selector: 'app-lista-aluno',
@@ -8,30 +9,27 @@ import { Component, OnInit } from '@angular/core';
 export class ListaAlunoComponent implements OnInit {
 
   loading: boolean;
+  error: boolean;
+  errorMessage: string;
+  nome: string;
 
   alunos = [];
 
-  constructor() { }
+  constructor(private alunoService: AlunoService) { }
 
   ngOnInit(): void {
-    this.buscarAlunos();
   }
 
-  async load(): Promise<void> {
+  consultar(): void {
     this.loading = true;
-    await new Promise(resolve => setTimeout(resolve, 500));
-    this.buscarAlunos();
-    this.loading = false;
-  }
+    this.alunoService.consultar({nome: this.nome})
+      .then(alunos => {
+      this.alunos = alunos;
+    }).catch(error => {
+      this.errorMessage = error;
+    });
 
-  buscarAlunos(): void{
-    this.alunos = [{ idAluno: 1, idUsuario: 1, nome: 'Maicon Lanzendorf', matricula: '123456', usuario: 'maicon.lanzendorf', senha: 'senha', email: 'email'},
-      { idAluno: 2, idUsuario: 2, nome: 'Maicon Lanzendorf', matricula: '123456', usuario: 'maicon.lanzendorf', senha: 'senha', email: 'email'},
-      { idAluno: 3, idUsuario: 3, nome: 'Maicon Lanzendorf', matricula: '123456', usuario: 'maicon.lanzendorf', senha: 'senha', email: 'email'},
-      { idAluno: 4, idUsuario: 4, nome: 'Maicon Lanzendorf', matricula: '123456', usuario: 'maicon.lanzendorf', senha: 'senha', email: 'email'},
-      { idAluno: 5, idUsuario: 5, nome: 'Maicon Lanzendorf', matricula: '123456', usuario: 'maicon.lanzendorf', senha: 'senha', email: 'email'},
-      { idAluno: 6, idUsuario: 6, nome: 'Maicon Lanzendorf', matricula: '123456', usuario: 'maicon.lanzendorf', senha: 'senha', email: 'email'},
-      { idAluno: 7, idUsuario: 7, nome: 'Maicon Lanzendorf', matricula: '123456', usuario: 'maicon.lanzendorf', senha: 'senha', email: 'email'}];
+    this.loading = false;
   }
 
 }

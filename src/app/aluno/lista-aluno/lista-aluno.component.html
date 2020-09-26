@@ -1,26 +1,33 @@
 <div class="container">
   <h1>Buscar Alunos</h1>
 
-  <div class="p-grid">
-    <div class="p-col-6 p-md-3 p-lg-3">
-      <label for="nome" class="input-label">Nome</label>
-      <input id="nome" type="text" pInputText>
-    </div>
-    <div class="p-col-6 p-md-3 p-lg-3">
-      <label for="email" class="input-label">E-mail</label>
-      <input id="email" type="text" pInputText>
-    </div>
-    <div class="p-col-6 p-md-3 p-lg-3">
-      <label for="matricula" class="input-label">Matrícula</label>
-      <input id="matricula" type="text" pInputText>
-    </div>
+  <form (ngSubmit)="consultar()">
+    <div class="p-grid">
+      <div class="p-col-6 p-md-3 p-lg-3">
+        <label for="nome" class="input-label">Nome</label>
+        <input id="nome" type="text" pInputText name="nome" [(ngModel)]="nome">
+      </div>
+      <div class="p-col-6 p-md-3 p-lg-3">
+        <label for="email" class="input-label">E-mail</label>
+        <input id="email" type="text" pInputText>
+      </div>
+      <div class="p-col-6 p-md-3 p-lg-3">
+        <label for="matricula" class="input-label">Matrícula</label>
+        <input id="matricula" type="text" pInputText>
+      </div>
 
+      <div class="p-col-12 p-md-12 p-lg-12">
+        <p-button label="Pesquisar" icon="pi pi-search" type="submit"></p-button>
+      </div>
+    </div>
+  </form>
+
+
+  <div class="p-grid">
     <div class="p-col-12 p-md-12 p-lg-12">
-      <p-button label="Pesquisar" icon="pi pi-search" (click)="load()" type="submit"></p-button>
+      <app-message error="{{error}}" text="{{errorMessage}}"></app-message>
     </div>
-  </div>
 
-  <div class="p-grid">
     <div class="p-col-12 p-md-12 p-lg-12">
       <p-table [value]="alunos" [loading]="loading" [paginator]="true" [rows]="10" [showCurrentPageReport]="true"
                currentPageReportTemplate="{first} de {last} em um total de {totalRecords} registros"

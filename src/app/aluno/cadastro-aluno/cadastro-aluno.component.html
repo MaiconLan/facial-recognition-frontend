@@ -12,9 +12,7 @@
       <div class="p-col-12 p-md-6 p-lg-4">
         <label style="display: block">Nome:</label>
         <input pInputText type="text" ngModel name="nome" #nome="ngModel" required>
-        <!--
-        <app-message [control]="nome" error="required" text="Informe um nome"></app-message>
-        -->
+        <app-input-message [control]="nome" error="required" text="Informe um nome"></app-input-message>
       </div>
 
       <div class="p-col-12 p-md-6 p-lg-4">

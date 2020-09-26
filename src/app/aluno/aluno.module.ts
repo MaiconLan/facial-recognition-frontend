@@ -8,6 +8,8 @@ import {InputTextModule} from 'primeng/inputtext';
 import {FormsModule} from '@angular/forms';
 import {SelectButtonModule} from 'primeng/selectbutton';
 import {PasswordModule} from 'primeng/password';
+import {SharedModule} from '../shared/shared.module';
+import {HttpClient, HttpClientModule} from '@angular/common/http';
 
 
 @NgModule({
@@ -22,7 +24,9 @@ import {PasswordModule} from 'primeng/password';
     FormsModule,
     InputTextModule,
     SelectButtonModule,
-    PasswordModule
+    PasswordModule,
+    SharedModule,
+    HttpClientModule
   ],
   exports: [
     CadastroAlunoComponent,

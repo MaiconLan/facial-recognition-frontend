@@ -2,11 +2,11 @@ import {Component, Input, OnInit} from '@angular/core';
 import {FormControl} from '@angular/forms';
 
 @Component({
-  selector: 'app-message',
-  templateUrl: './message.component.html',
-  styleUrls: ['./message.component.css']
+  selector: 'app-input-message',
+  templateUrl: './input-message.component.html',
+  styleUrls: ['./input-message.component.css']
 })
-export class MessageComponent {
+export class InputMessageComponent {
 
   @Input() error: string;
   @Input() control: FormControl;
@@ -15,4 +15,5 @@ export class MessageComponent {
   temErro(): boolean {
     return this.control.hasError(this.error) && this.control.dirty;
   }
+
 }
