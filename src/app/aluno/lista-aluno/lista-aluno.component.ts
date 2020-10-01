@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import {AlunoService} from '../aluno.service';
+import {AlunoFiltro, AlunoService} from '../aluno.service';
+import {LazyLoadEvent} from 'primeng/api';
 
 @Component({
   selector: 'app-lista-aluno',
@@ -8,10 +9,12 @@ import {AlunoService} from '../aluno.service';
 })
 export class ListaAlunoComponent implements OnInit {
 
-  loading: boolean;
+  loading = false;
   error: boolean;
   errorMessage: string;
-  nome: string;
+  totalRegistros = 0;
+
+  filtro = new AlunoFiltro();
 
   alunos = [];
 
@@ -20,16 +23,25 @@ export class ListaAlunoComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  consultar(): void {
+  consultar(pagina = 0): void {
+    this.filtro.pagina = pagina;
+
     this.loading = true;
-    this.alunoService.consultar({nome: this.nome})
-      .then(alunos => {
-      this.alunos = alunos;
+    this.alunoService.consultar(this.filtro)
+      .then(response => {
+        console.log(response);
+        this.totalRegistros = response.totalElements;
+        this.alunos = response.content;
     }).catch(error => {
       this.errorMessage = error;
     });
 
     this.loading = false;
+  }
+
+  aoMudarPagina(event: LazyLoadEvent): void {
+    const pagina = event.first / event.rows;
+    this.consultar(pagina);
   }
 
 }
