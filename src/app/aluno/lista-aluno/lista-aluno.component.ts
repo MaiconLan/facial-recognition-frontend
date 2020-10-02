@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {AlunoFiltro, AlunoService} from '../aluno.service';
 import {LazyLoadEvent} from 'primeng/api';
 
@@ -29,14 +29,24 @@ export class ListaAlunoComponent implements OnInit {
     this.loading = true;
     this.alunoService.consultar(this.filtro)
       .then(response => {
-        console.log(response);
-        this.totalRegistros = response.totalElements;
-        this.alunos = response.content;
+        console.log('RESPONSE: ', response);
+        if (!response) {
+          this.cleanList();
+        } else {
+          this.totalRegistros = response.totalElements;
+          this.alunos = response.content;
+        }
     }).catch(error => {
       this.errorMessage = error;
+      this.cleanList();
     });
 
     this.loading = false;
+  }
+
+  private cleanList(): void {
+    this.totalRegistros = 0;
+    this.alunos = [];
   }
 
   aoMudarPagina(event: LazyLoadEvent): void {

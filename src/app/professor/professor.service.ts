@@ -32,6 +32,11 @@ export class ProfessorService {
       params = params.set('email', filtro.email);
     }
 
-    return this.http.get(this.url, {headers, params}).toPromise().then(response => response);
+    return this.http.get(this.url, {headers, params})
+      .toPromise()
+      .then(response => response)
+      .catch(error => {
+      return Promise.reject('Erro ao consultar professores');
+    });
   }
 }

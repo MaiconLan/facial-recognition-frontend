@@ -21,9 +21,6 @@ export class AlunoService {
     const headers = new HttpHeaders().append('Authorization', 'Basic ' + btoa('admin:admin'));
     let params = new HttpParams();
 
-    console.log('pagina', filtro.pagina.toString());
-    console.log('itensPorPagina', filtro.itensPorPagina.toString());
-
     params = params.set('page', filtro.pagina.toString());
     params = params.set('size', filtro.itensPorPagina.toString());
 
@@ -31,7 +28,12 @@ export class AlunoService {
       params = params.set('nome', filtro.nome);
     }
 
-    return this.http.get(this.url, {headers, params}).toPromise().then(response => response);
+    return this.http.get(this.url, {headers, params})
+      .toPromise()
+      .then(response => response)
+      .catch(error => {
+        return Promise.reject('Erro ao consultar alunos');
+      });
   }
 
 }

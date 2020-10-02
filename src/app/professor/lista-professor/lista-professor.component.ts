@@ -1,5 +1,4 @@
-import { Component, OnInit } from '@angular/core';
-import {AlunoFiltro} from '../../aluno/aluno.service';
+import {Component} from '@angular/core';
 import {ProfessorFiltro, ProfessorService} from '../professor.service';
 import {LazyLoadEvent} from 'primeng/api';
 
@@ -19,7 +18,8 @@ export class ListaProfessorComponent {
 
   professores = [];
 
-  constructor(private professorService: ProfessorService) { }
+  constructor(private professorService: ProfessorService) {
+  }
 
   async load(): Promise<void> {
     this.loading = true;
@@ -28,21 +28,31 @@ export class ListaProfessorComponent {
     this.loading = false;
   }
 
-  consultar(pagina = 0): void{
+  consultar(pagina = 0): void {
     this.filtro.pagina = pagina;
 
     this.loading = true;
     this.professorService.consultar(this.filtro)
       .then(response => {
-        console.log(response);
-        this.totalRegistros = response.totalElements;
-        this.professores = response.content;
+        if (!response) {
+          this.cleanList();
+        } else {
+          this.totalRegistros = response.totalElements;
+          this.professores = response.content;
+        }
       }).catch(error => {
       this.errorMessage = error;
+      this.cleanList();
     });
 
     this.loading = false;
   }
+
+  private cleanList(): void {
+    this.totalRegistros = 0;
+    this.professores = [];
+  }
+
 
   aoMudarPagina(event: LazyLoadEvent): void {
     const pagina = event.first / event.rows;
