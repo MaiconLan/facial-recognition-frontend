@@ -1,6 +1,6 @@
 import {Component} from '@angular/core';
 import {ProfessorFiltro, ProfessorService} from '../professor.service';
-import {LazyLoadEvent, MessageService} from 'primeng/api';
+import {ConfirmationService, LazyLoadEvent, MessageService} from 'primeng/api';
 
 @Component({
   selector: 'app-lista-professor',
@@ -17,7 +17,8 @@ export class ListaProfessorComponent {
   professores = [];
 
   constructor(private professorService: ProfessorService,
-              private messageService: MessageService) {
+              private messageService: MessageService,
+              private confirmation: ConfirmationService) {
   }
 
   consultar(pagina = 0): void {
@@ -43,6 +44,21 @@ export class ListaProfessorComponent {
   private cleanList(): void {
     this.totalRegistros = 0;
     this.professores = [];
+  }
+
+  confirmarExclusao(professor: any): void {
+    this.confirmation.confirm({
+      icon: 'pi pi-info-circle',
+      header: 'Confirmar exclusão!',
+      message: 'Você tem certeza de que deseja excluir?',
+      accept: () => {
+        this.excluir(professor);
+      },
+      acceptLabel: 'Sim',
+      rejectLabel: 'Não',
+      acceptButtonStyleClass: 'p-button-info p-button-rounded',
+      rejectButtonStyleClass: 'botao-excluir p-button-danger p-button-rounded'
+    });
   }
 
   excluir(professor: any): void {

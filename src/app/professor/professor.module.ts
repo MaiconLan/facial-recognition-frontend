@@ -22,12 +22,10 @@ import {MessageModule} from 'primeng/message';
     InputTextModule,
     TooltipModule,
     FormsModule,
-    ToastModule,
-    MessageModule
   ],
   exports: [
     ListaProfessorComponent
   ],
-  providers: [MessageService]
+  providers: []
 })
 export class ProfessorModule { }

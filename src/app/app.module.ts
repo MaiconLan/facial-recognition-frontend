@@ -14,6 +14,9 @@ import {SelectButtonModule} from 'primeng/selectbutton';
 import {AlunoModule} from './aluno/aluno.module';
 import {CoreModule} from './core/core.module';
 import {ProfessorModule} from './professor/professor.module';
+import {ConfirmDialogModule} from 'primeng/confirmdialog';
+import {ToastModule} from 'primeng/toast';
+import {ConfirmationService, MessageService} from 'primeng/api';
 
 @NgModule({
   declarations: [
@@ -34,8 +37,11 @@ import {ProfessorModule} from './professor/professor.module';
     AlunoModule,
     CoreModule,
     ProfessorModule,
+    ConfirmDialogModule,
+    ToastModule,
+    MessageModule,
   ],
-  providers: [],
+  providers: [MessageService, ConfirmationService],
   bootstrap: [AppComponent]
 })
 export class AppModule {

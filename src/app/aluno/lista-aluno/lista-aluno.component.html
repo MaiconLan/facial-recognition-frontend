@@ -1,6 +1,5 @@
 <div class="container">
   <h1>Buscar Alunos</h1>
-  <p-toast></p-toast>
   <form (ngSubmit)="consultar()" autocomplete="off">
     <div class="p-grid">
       <div class="p-col-6 p-md-3 p-lg-3">
@@ -63,7 +62,7 @@
                  class="botao-editar p-button-rounded"></a>
               <button pButton pTooltip="Excluir" tooltipPosition="top" icon="pi pi-trash"
                       class="botao-excluir p-button-danger p-button-rounded"
-              (click)="excluir(aluno)"></button>
+              (click)="confirmarExclusao(aluno)"></button>
             </td>
           </tr>
         </ng-template>

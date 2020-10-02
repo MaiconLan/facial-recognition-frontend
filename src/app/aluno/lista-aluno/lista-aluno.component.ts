@@ -1,6 +1,6 @@
 import {Component} from '@angular/core';
 import {AlunoFiltro, AlunoService} from '../aluno.service';
-import {LazyLoadEvent, MessageService} from 'primeng/api';
+import {ConfirmationService, LazyLoadEvent, MessageService} from 'primeng/api';
 
 @Component({
   selector: 'app-lista-aluno',
@@ -17,7 +17,8 @@ export class ListaAlunoComponent {
   alunos = [];
 
   constructor(private alunoService: AlunoService,
-              private messageService: MessageService) {
+              private messageService: MessageService,
+              private confirmation: ConfirmationService) {
   }
 
   consultar(pagina = 0): void {
@@ -48,6 +49,21 @@ export class ListaAlunoComponent {
   aoMudarPagina(event: LazyLoadEvent): void {
     const pagina = event.first / event.rows;
     this.consultar(pagina);
+  }
+
+  confirmarExclusao(aluno: any): void {
+    this.confirmation.confirm({
+      icon: 'pi pi-info-circle',
+      header: 'Confirmar exclusão!',
+      message: 'Você tem certeza de que deseja excluir?',
+      accept: () => {
+        this.excluir(aluno);
+      },
+      acceptLabel: 'Sim',
+      rejectLabel: 'Não',
+      acceptButtonStyleClass: 'p-button-info p-button-rounded',
+      rejectButtonStyleClass: 'botao-excluir p-button-danger p-button-rounded'
+    });
   }
 
   excluir(aluno: any): void {

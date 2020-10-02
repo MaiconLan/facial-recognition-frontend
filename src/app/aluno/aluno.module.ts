@@ -12,7 +12,9 @@ import {SharedModule} from '../shared/shared.module';
 import {HttpClientModule} from '@angular/common/http';
 import {ToastModule} from 'primeng/toast';
 import {MessageModule} from 'primeng/message';
-import {MessageService} from 'primeng/api';
+import {ConfirmationService, MessageService} from 'primeng/api';
+import {ConfirmDialogModule} from 'primeng/confirmdialog';
+
 
 @NgModule({
   declarations: [
@@ -29,14 +31,14 @@ import {MessageService} from 'primeng/api';
     PasswordModule,
     SharedModule,
     HttpClientModule,
-    ToastModule,
-    MessageModule
+
+    ConfirmDialogModule,
   ],
   exports: [
     CadastroAlunoComponent,
     ListaAlunoComponent
   ],
-  providers: [MessageService]
+  providers: [MessageService, ConfirmationService]
 })
 export class AlunoModule {
 }
