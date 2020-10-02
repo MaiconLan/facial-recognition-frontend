@@ -9,8 +9,10 @@ import {FormsModule} from '@angular/forms';
 import {SelectButtonModule} from 'primeng/selectbutton';
 import {PasswordModule} from 'primeng/password';
 import {SharedModule} from '../shared/shared.module';
-import {HttpClient, HttpClientModule} from '@angular/common/http';
-
+import {HttpClientModule} from '@angular/common/http';
+import {ToastModule} from 'primeng/toast';
+import {MessageModule} from 'primeng/message';
+import {MessageService} from 'primeng/api';
 
 @NgModule({
   declarations: [
@@ -26,12 +28,15 @@ import {HttpClient, HttpClientModule} from '@angular/common/http';
     SelectButtonModule,
     PasswordModule,
     SharedModule,
-    HttpClientModule
+    HttpClientModule,
+    ToastModule,
+    MessageModule
   ],
   exports: [
     CadastroAlunoComponent,
     ListaAlunoComponent
-  ]
+  ],
+  providers: [MessageService]
 })
 export class AlunoModule {
 }

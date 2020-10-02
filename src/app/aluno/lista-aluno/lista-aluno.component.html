@@ -1,6 +1,6 @@
 <div class="container">
   <h1>Buscar Alunos</h1>
-
+  <p-toast></p-toast>
   <form (ngSubmit)="consultar()" autocomplete="off">
     <div class="p-grid">
       <div class="p-col-6 p-md-3 p-lg-3">
@@ -9,11 +9,11 @@
       </div>
       <div class="p-col-6 p-md-3 p-lg-3">
         <label for="email" class="input-label">E-mail</label>
-        <input id="email" type="text" pInputText>
+        <input id="email" type="text" pInputText name="email" [(ngModel)]="filtro.email">
       </div>
       <div class="p-col-6 p-md-3 p-lg-3">
         <label for="matricula" class="input-label">Matrícula</label>
-        <input id="matricula" type="text" pInputText>
+        <input id="matricula" type="text" pInputText name="matricula" [(ngModel)]="filtro.matricula">
       </div>
 
       <div class="p-col-12 p-md-12 p-lg-12">
@@ -24,10 +24,6 @@
 
 
   <div class="p-grid">
-    <div class="p-col-12 p-md-12 p-lg-12">
-      <app-message error="{{error}}" text="{{errorMessage}}"></app-message>
-    </div>
-
     <div class="p-col-12 p-md-12 p-lg-12">
       <p-table [value]="alunos"
                [loading]="loading"
@@ -66,7 +62,8 @@
               <a pButton pTooltip="Editar" tooltipPosition="top" icon="pi pi-pencil"
                  class="botao-editar p-button-rounded"></a>
               <button pButton pTooltip="Excluir" tooltipPosition="top" icon="pi pi-trash"
-                      class="botao-excluir p-button-danger p-button-rounded"></button>
+                      class="botao-excluir p-button-danger p-button-rounded"
+              (click)="excluir(aluno)"></button>
             </td>
           </tr>
         </ng-template>

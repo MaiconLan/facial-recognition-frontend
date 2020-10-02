@@ -8,7 +8,6 @@ import {TableModule} from 'primeng/table';
 import {BrowserModule} from '@angular/platform-browser';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {TooltipModule} from 'primeng/tooltip';
-import {NavbarComponent} from './core/navbar/navbar.component';
 import {InputTextModule} from 'primeng/inputtext';
 import {PasswordModule} from 'primeng/password';
 import {SelectButtonModule} from 'primeng/selectbutton';
@@ -20,22 +19,22 @@ import {ProfessorModule} from './professor/professor.module';
   declarations: [
     AppComponent,
   ],
-    imports: [
-        BrowserModule,
-        FormsModule,
-        MessageModule,
-        ButtonModule,
-        TableModule,
-        BrowserModule,
-        BrowserAnimationsModule,
-        TooltipModule,
-        InputTextModule,
-        PasswordModule,
-        SelectButtonModule,
-        AlunoModule,
-        CoreModule,
-        ProfessorModule
-    ],
+  imports: [
+    BrowserModule,
+    FormsModule,
+    MessageModule,
+    ButtonModule,
+    TableModule,
+    BrowserModule,
+    BrowserAnimationsModule,
+    TooltipModule,
+    InputTextModule,
+    PasswordModule,
+    SelectButtonModule,
+    AlunoModule,
+    CoreModule,
+    ProfessorModule,
+  ],
   providers: [],
   bootstrap: [AppComponent]
 })

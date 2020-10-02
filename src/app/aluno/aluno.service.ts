@@ -3,6 +3,8 @@ import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
 
 export class AlunoFiltro {
   nome: string;
+  email: string;
+  matricula: string;
   pagina = 0;
   itensPorPagina = 10;
 }
@@ -27,12 +29,29 @@ export class AlunoService {
     if (filtro.nome) {
       params = params.set('nome', filtro.nome);
     }
+    if (filtro.email) {
+      params = params.set('email', filtro.email);
+    }
+    if (filtro.matricula) {
+      params = params.set('matricula', filtro.matricula);
+    }
 
     return this.http.get(this.url, {headers, params})
       .toPromise()
       .then(response => response)
       .catch(error => {
         return Promise.reject('Erro ao consultar alunos');
+      });
+  }
+
+  excluir(id: number): Promise<void> {
+    const headers = new HttpHeaders().append('Authorization', 'Basic ' + btoa('admin:admin'));
+
+    return this.http.delete(`${this.url}/${id}`, {headers})
+      .toPromise()
+      .then(() => null)
+      .catch(error => {
+        return Promise.reject(error);
       });
   }
 

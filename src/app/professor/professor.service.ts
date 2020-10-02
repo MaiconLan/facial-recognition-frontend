@@ -39,4 +39,15 @@ export class ProfessorService {
       return Promise.reject('Erro ao consultar professores');
     });
   }
+
+  excluir(id: number): Promise<void> {
+    const headers = new HttpHeaders().append('Authorization', 'Basic ' + btoa('admin:admin'));
+
+    return this.http.delete(`${this.url}/${id}`, {headers})
+      .toPromise()
+      .then(() => null)
+      .catch(error => {
+        return Promise.reject(error);
+      });
+  }
 }
