@@ -1,5 +1,6 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
+import {Aluno, Professor} from '../core/model';
 
 export class ProfessorFiltro {
   nome: string;
@@ -46,6 +47,21 @@ export class ProfessorService {
     return this.http.delete(`${this.url}/${id}`, {headers})
       .toPromise()
       .then(() => null)
+      .catch(error => {
+        return Promise.reject(error);
+      });
+  }
+
+  salvar(professor: Professor): Promise<any> {
+    const headers = new HttpHeaders()
+      .append('Authorization', 'Basic ' + btoa('admin:admin'))
+      .append('Content-Type', 'application/json');
+
+    return this.http.post(`${this.url}`, JSON.stringify(professor), {headers})
+      .toPromise()
+      .then(response => {
+        return response;
+      })
       .catch(error => {
         return Promise.reject(error);
       });

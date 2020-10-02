@@ -70,4 +70,34 @@ export class AlunoService {
         return Promise.reject(error);
       });
   }
+
+  atualizar(aluno: Aluno): Promise<any> {
+    const headers = new HttpHeaders()
+      .append('Authorization', 'Basic ' + btoa('admin:admin'))
+      .append('Content-Type', 'application/json');
+
+    return this.http.put(`${this.url}/${aluno.idAluno}`, JSON.stringify(aluno), {headers})
+      .toPromise()
+      .then(response => {
+        return response;
+      })
+      .catch(error => {
+        return Promise.reject(error);
+      });
+  }
+
+  buscar(id: number): Promise<any> {
+    const headers = new HttpHeaders()
+      .append('Authorization', 'Basic ' + btoa('admin:admin'))
+      .append('Content-Type', 'application/json');
+
+    return this.http.get(`${this.url}/${id}`, { headers })
+      .toPromise()
+      .then(response => {
+        return response;
+      })
+      .catch(error => {
+        return Promise.reject(error);
+      });
+  }
 }

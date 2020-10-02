@@ -14,6 +14,8 @@ import {ToastModule} from 'primeng/toast';
 import {MessageModule} from 'primeng/message';
 import {ConfirmationService, MessageService} from 'primeng/api';
 import {ConfirmDialogModule} from 'primeng/confirmdialog';
+import {RouterModule} from '@angular/router';
+import {TooltipModule} from 'primeng/tooltip';
 
 
 @NgModule({
@@ -33,6 +35,8 @@ import {ConfirmDialogModule} from 'primeng/confirmdialog';
     HttpClientModule,
 
     ConfirmDialogModule,
+    RouterModule,
+    TooltipModule,
   ],
   exports: [
     CadastroAlunoComponent,

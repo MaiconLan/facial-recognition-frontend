@@ -7,13 +7,14 @@ import {SharedModule} from '../shared/shared.module';
 import {InputTextModule} from 'primeng/inputtext';
 import {TooltipModule} from 'primeng/tooltip';
 import {FormsModule} from '@angular/forms';
-import {ToastModule} from 'primeng/toast';
-import {MessageService} from 'primeng/api';
-import {MessageModule} from 'primeng/message';
+import {CadastroProfessorComponent} from './cadastro-professor/cadastro-professor.component';
+import {SelectButtonModule} from 'primeng/selectbutton';
+import {PasswordModule} from 'primeng/password';
+import {RouterModule} from '@angular/router';
 
 
 @NgModule({
-  declarations: [ListaProfessorComponent],
+  declarations: [ListaProfessorComponent, CadastroProfessorComponent],
   imports: [
     CommonModule,
     ButtonModule,
@@ -22,10 +23,14 @@ import {MessageModule} from 'primeng/message';
     InputTextModule,
     TooltipModule,
     FormsModule,
+    SelectButtonModule,
+    PasswordModule,
+    RouterModule,
   ],
-  exports: [
-    ListaProfessorComponent
-  ],
+    exports: [
+        ListaProfessorComponent,
+        CadastroProfessorComponent
+    ],
   providers: []
 })
 export class ProfessorModule { }
