@@ -9,7 +9,7 @@
       </div>
       <div class="p-col-6 p-md-3 p-lg-3">
         <label for="email" class="input-label">E-mail</label>
-        <input id="email" type="text" pInputText>
+        <input id="email" type="text" pInputText name="email" [(ngModel)]="filtro.email">
       </div>
       <div class="p-col-12 p-md-12 p-lg-12">
         <p-button label="Pesquisar" icon="pi pi-search" type="submit"></p-button>

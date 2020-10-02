@@ -5,6 +5,8 @@ import {ButtonModule} from 'primeng/button';
 import {TableModule} from 'primeng/table';
 import {SharedModule} from '../shared/shared.module';
 import {InputTextModule} from 'primeng/inputtext';
+import {TooltipModule} from 'primeng/tooltip';
+import {FormsModule} from '@angular/forms';
 
 
 
@@ -16,6 +18,8 @@ import {InputTextModule} from 'primeng/inputtext';
     TableModule,
     SharedModule,
     InputTextModule,
+    TooltipModule,
+    FormsModule,
   ],
   exports: [
     ListaProfessorComponent

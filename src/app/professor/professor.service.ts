@@ -1,6 +1,5 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
-import {AlunoFiltro} from '../aluno/aluno.service';
 
 export class ProfessorFiltro {
   nome: string;
