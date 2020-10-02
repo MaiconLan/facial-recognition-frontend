@@ -1,5 +1,5 @@
 <div class="container">
-  <form autocomplete="off">
+  <form #f="ngForm" autocomplete="off" (ngSubmit)="salvar(f)">
     <div class="p-grid">
       <div class="p-col-12 p-md-12 p-lg-12">
         <h1>Cadastrar Alunos</h1>
@@ -11,23 +11,22 @@
 
       <div class="p-col-12 p-md-6 p-lg-4">
         <label style="display: block">Nome:</label>
-        <input pInputText type="text" ngModel name="nome" #nome="ngModel" required>
-        <app-input-message [control]="nome" error="required" text="Informe um nome"></app-input-message>
+        <input pInputText type="text" name="nome" [(ngModel)]="aluno.nome" required>
       </div>
 
       <div class="p-col-12 p-md-6 p-lg-4">
         <label style="display: block">E-mail:</label>
-        <input pInputText type="text">
+        <input pInputText type="text" name="email" [(ngModel)]="aluno.email"/>
       </div>
 
       <div class="p-col-12 p-md-6 p-lg-4">
         <label style="display: block">Usuário:</label>
-        <input pInputText type="text">
+        <input pInputText type="text" name="usuario" [(ngModel)]="aluno.usuario"/>
       </div>
 
       <div class="p-col-12 p-md-6 p-lg-4">
         <label style="display: block">Senha:</label>
-        <input type="password" pPassword/>
+        <input type="password" pPassword name="senha" [(ngModel)]="aluno.senha"/>
       </div>
 
       <div class="p-col-12 p-md-12 p-lg-12">

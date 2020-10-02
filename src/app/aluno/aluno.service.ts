@@ -1,5 +1,6 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
+import {Aluno} from '../core/model';
 
 export class AlunoFiltro {
   nome: string;
@@ -55,4 +56,18 @@ export class AlunoService {
       });
   }
 
+  salvar(aluno: Aluno): Promise<any> {
+    const headers = new HttpHeaders()
+      .append('Authorization', 'Basic ' + btoa('admin:admin'))
+      .append('Content-Type', 'application/json');
+
+    return this.http.post(`${this.url}`, JSON.stringify(aluno), {headers})
+      .toPromise()
+      .then(response => {
+        return response;
+      })
+      .catch(error => {
+        return Promise.reject(error);
+      });
+  }
 }

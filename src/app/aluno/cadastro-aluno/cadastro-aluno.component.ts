@@ -1,4 +1,8 @@
-import {Component, OnInit} from '@angular/core';
+import {Component} from '@angular/core';
+import {Aluno} from '../../core/model';
+import {NgForm} from '@angular/forms';
+import {AlunoService} from '../aluno.service';
+import {ConfirmationService, MessageService} from 'primeng/api';
 
 
 @Component({
@@ -6,31 +10,35 @@ import {Component, OnInit} from '@angular/core';
   templateUrl: './cadastro-aluno.component.html',
   styleUrls: ['./cadastro-aluno.component.css']
 })
-export class CadastroAlunoComponent implements OnInit {
+export class CadastroAlunoComponent {
 
-  usuario = new Usuario();
-  result = new Usuario();
+  constructor(private alunoService: AlunoService,
+              private messageService: MessageService,
+              private confirmation: ConfirmationService) { }
+
+  aluno = new Aluno();
 
   status = [
     {label: 'Ativo', value: true},
     {label: 'Inativo', value: false},
   ];
 
-  constructor() {
+  salvar(form: NgForm): void {
+    this.alunoService.salvar(this.aluno).then(() => {
+      this.addSuccess('Salvo', 'Registro salvo com sucesso');
+      form.reset();
+      this.aluno = new Aluno();
+    }).catch(error => {
+      this.addError('Erro ao salvar', error.error.mensagemUsuario);
+    });
   }
 
-  ngOnInit(): void {
+  addSuccess(title: string, message: string): void {
+    this.messageService.add({severity: 'success', summary: title, detail: message, life: 3000});
   }
 
-  save(): void {
-    this.result = this.usuario;
+  addError(title: string, message: string): void {
+    this.messageService.add({severity: 'error', summary: title, detail: message, life: 3000});
   }
-
 }
 
-export class Usuario {
-  nome: string;
-  email: string;
-  usuario: string;
-  senha: string;
-}
