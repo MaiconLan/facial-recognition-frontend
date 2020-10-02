@@ -1,8 +1,10 @@
-import {Injectable} from '@angular/core';
+import { Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
+import {AlunoFiltro} from '../aluno/aluno.service';
 
-export class AlunoFiltro {
+export class ProfessorFiltro {
   nome: string;
+  email: string;
   pagina = 0;
   itensPorPagina = 10;
 }
@@ -10,19 +12,15 @@ export class AlunoFiltro {
 @Injectable({
   providedIn: 'root'
 })
-export class AlunoService {
+export class ProfessorService {
 
-  url = 'http://localhost:8080/aluno';
+  url = 'http://localhost:8080/professor';
 
-  constructor(private http: HttpClient) {
-  }
+  constructor(private http: HttpClient) { }
 
-  consultar(filtro: AlunoFiltro): Promise<any> {
+  consultar(filtro: ProfessorFiltro): Promise<any> {
     const headers = new HttpHeaders().append('Authorization', 'Basic ' + btoa('admin:admin'));
     let params = new HttpParams();
-
-    console.log('pagina', filtro.pagina.toString());
-    console.log('itensPorPagina', filtro.itensPorPagina.toString());
 
     params = params.set('page', filtro.pagina.toString());
     params = params.set('size', filtro.itensPorPagina.toString());
@@ -31,7 +29,10 @@ export class AlunoService {
       params = params.set('nome', filtro.nome);
     }
 
+    if (filtro.email) {
+      params = params.set('email', filtro.email);
+    }
+
     return this.http.get(this.url, {headers, params}).toPromise().then(response => response);
   }
-
 }

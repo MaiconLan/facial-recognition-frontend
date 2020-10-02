@@ -1,24 +1,36 @@
 <div class="container">
   <h1>Buscar Professores</h1>
 
-  <div class="p-grid">
-    <div class="p-col-6 p-md-3 p-lg-3">
-      <label for="nome" class="input-label">Nome</label>
-      <input id="nome" type="text" pInputText>
+  <form (ngSubmit)="consultar()" autocomplete="off">
+    <div class="p-grid">
+      <div class="p-col-6 p-md-3 p-lg-3">
+        <label for="nome" class="input-label">Nome</label>
+        <input id="nome" type="text" pInputText name="nome" [(ngModel)]="filtro.nome">
+      </div>
+      <div class="p-col-6 p-md-3 p-lg-3">
+        <label for="email" class="input-label">E-mail</label>
+        <input id="email" type="text" pInputText>
+      </div>
+      <div class="p-col-12 p-md-12 p-lg-12">
+        <p-button label="Pesquisar" icon="pi pi-search" type="submit"></p-button>
+      </div>
     </div>
-    <div class="p-col-6 p-md-3 p-lg-3">
-      <label for="email" class="input-label">E-mail</label>
-      <input id="email" type="text" pInputText>
+  </form>
+
+  <div class="p-grid">
+    <div class="p-col-12 p-md-12 p-lg-12">
+      <app-message error="{{error}}" text="{{errorMessage}}"></app-message>
     </div>
 
     <div class="p-col-12 p-md-12 p-lg-12">
-      <p-button label="Pesquisar" icon="pi pi-search" (click)="load()" type="submit"></p-button>
-    </div>
-  </div>
-
-  <div class="p-grid">
-    <div class="p-col-12 p-md-12 p-lg-12">
-      <p-table [value]="professores" [loading]="loading" [paginator]="true" [rows]="10" [showCurrentPageReport]="true"
+      <p-table [value]="professores"
+               [loading]="loading"
+               [paginator]="true"
+               [lazy]="true"
+               [totalRecords]="totalRegistros"
+               (onLazyLoad)="aoMudarPagina($event)"
+               [rows]="filtro.itensPorPagina"
+               [showCurrentPageReport]="true"
                currentPageReportTemplate="{first} de {last} em um total de {totalRecords} registros"
                [rowsPerPageOptions]="[10,25,50]"
                [responsive]="true">
@@ -54,7 +66,7 @@
         <ng-template pTemplate="emptymessage">
           <tr>
             <td [attr.colspan]="4">
-              Nenhum professor encontrado.
+              Nenhum registro encontrado.
             </td>
           </tr>
         </ng-template>

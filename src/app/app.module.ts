@@ -14,26 +14,28 @@ import {PasswordModule} from 'primeng/password';
 import {SelectButtonModule} from 'primeng/selectbutton';
 import {AlunoModule} from './aluno/aluno.module';
 import {CoreModule} from './core/core.module';
+import {ProfessorModule} from './professor/professor.module';
 
 @NgModule({
   declarations: [
     AppComponent,
   ],
-  imports: [
-    BrowserModule,
-    FormsModule,
-    MessageModule,
-    ButtonModule,
-    TableModule,
-    BrowserModule,
-    BrowserAnimationsModule,
-    TooltipModule,
-    InputTextModule,
-    PasswordModule,
-    SelectButtonModule,
-    AlunoModule,
-    CoreModule
-  ],
+    imports: [
+        BrowserModule,
+        FormsModule,
+        MessageModule,
+        ButtonModule,
+        TableModule,
+        BrowserModule,
+        BrowserAnimationsModule,
+        TooltipModule,
+        InputTextModule,
+        PasswordModule,
+        SelectButtonModule,
+        AlunoModule,
+        CoreModule,
+        ProfessorModule
+    ],
   providers: [],
   bootstrap: [AppComponent]
 })
