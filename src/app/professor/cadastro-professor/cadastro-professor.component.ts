@@ -56,9 +56,9 @@ export class CadastroProfessorComponent implements OnInit {
   }
 
   criar(): void {
-    this.professorService.criar(this.professor).then(() => {
+    this.professorService.criar(this.professor).then(professor => {
       this.addSuccess('Criado', 'Registro criado com sucesso');
-      this.router.navigate(['/professor']);
+      this.router.navigate(['/professor', professor.idProfessor]);
     }).catch(error => {
       this.addError('Erro ao criar', error.error.mensagemUsuario);
     });
@@ -81,4 +81,13 @@ export class CadastroProfessorComponent implements OnInit {
     this.messageService.add({severity: 'error', summary: title, detail: message, life: 3000});
   }
 
+  novo(form: NgForm): void {
+    form.reset();
+
+    setTimeout(function(): void {
+      this.professor = new Professor();
+    }.bind(this), 1);
+
+    this.router.navigate(['/aluno/novo']);
+  }
 }

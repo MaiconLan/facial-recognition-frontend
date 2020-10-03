@@ -43,8 +43,8 @@ export class CadastroAlunoComponent implements OnInit {
       .then(response => {
         this.aluno = response;
       }).catch(error => {
-        console.log(error);
-        this.addError('Erro ao buscar', error.error.mensagemUsuario);
+      console.log(error);
+      this.addError('Erro ao buscar', error.error.mensagemUsuario);
     });
   }
 
@@ -57,9 +57,9 @@ export class CadastroAlunoComponent implements OnInit {
   }
 
   criar(): void {
-    this.alunoService.criar(this.aluno).then(() => {
+    this.alunoService.criar(this.aluno).then(aluno => {
       this.addSuccess('Criado', 'Registro criado com sucesso');
-      this.router.navigate(['/professor']);
+      this.router.navigate(['/aluno', aluno.idAluno]);
     }).catch(error => {
       this.addError('Erro ao criar', error.error.mensagemUsuario);
     });
@@ -80,6 +80,16 @@ export class CadastroAlunoComponent implements OnInit {
 
   addError(title: string, message: string): void {
     this.messageService.add({severity: 'error', summary: title, detail: message, life: 3000});
+  }
+
+  novo(form: NgForm): void {
+    form.reset();
+
+    setTimeout(function(): void {
+      this.aluno = new Aluno();
+    }.bind(this), 1);
+
+    this.router.navigate(['/aluno/novo']);
   }
 }
 
