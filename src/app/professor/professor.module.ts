@@ -27,10 +27,7 @@ import {RouterModule} from '@angular/router';
     PasswordModule,
     RouterModule,
   ],
-    exports: [
-        ListaProfessorComponent,
-        CadastroProfessorComponent
-    ],
+    exports: [],
   providers: []
 })
 export class ProfessorModule { }

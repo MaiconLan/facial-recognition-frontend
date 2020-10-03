@@ -4,6 +4,7 @@ import {NgForm} from '@angular/forms';
 import {AlunoService} from '../aluno.service';
 import {MessageService} from 'primeng/api';
 import {ActivatedRoute, Router} from '@angular/router';
+import {Title} from '@angular/platform-browser';
 
 
 @Component({
@@ -23,10 +24,12 @@ export class CadastroAlunoComponent implements OnInit {
   constructor(private alunoService: AlunoService,
               private messageService: MessageService,
               private rout: ActivatedRoute,
-              private router: Router) {
+              private router: Router,
+              private title: Title) {
   }
 
   ngOnInit(): void {
+    this.title.setTitle('Cadastro de alunos');
     const id = this.rout.snapshot.params.id;
 
     if (id) {
@@ -42,6 +45,7 @@ export class CadastroAlunoComponent implements OnInit {
     this.alunoService.buscar(id)
       .then(response => {
         this.aluno = response;
+        this.title.setTitle('Edição de alunos');
       }).catch(error => {
       console.log(error);
       this.addError('Erro ao buscar', error.error.mensagemUsuario);

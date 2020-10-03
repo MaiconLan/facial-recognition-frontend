@@ -1,13 +1,14 @@
-import {Component} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {AlunoFiltro, AlunoService} from '../aluno.service';
 import {ConfirmationService, LazyLoadEvent, MessageService} from 'primeng/api';
+import {Title} from '@angular/platform-browser';
 
 @Component({
   selector: 'app-lista-aluno',
   templateUrl: './lista-aluno.component.html',
   styleUrls: ['./lista-aluno.component.css']
 })
-export class ListaAlunoComponent {
+export class ListaAlunoComponent implements OnInit {
 
   loading = false;
   totalRegistros = 0;
@@ -18,8 +19,13 @@ export class ListaAlunoComponent {
 
   constructor(private alunoService: AlunoService,
               private messageService: MessageService,
-              private confirmation: ConfirmationService) {
+              private confirmation: ConfirmationService,
+              private title: Title) {
   }
+
+  ngOnInit(): void {
+        this.title.setTitle('Busca de alunos');
+    }
 
   consultar(pagina = 0): void {
     this.filtro.pagina = pagina;

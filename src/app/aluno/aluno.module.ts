@@ -10,8 +10,6 @@ import {SelectButtonModule} from 'primeng/selectbutton';
 import {PasswordModule} from 'primeng/password';
 import {SharedModule} from '../shared/shared.module';
 import {HttpClientModule} from '@angular/common/http';
-import {ToastModule} from 'primeng/toast';
-import {MessageModule} from 'primeng/message';
 import {ConfirmationService, MessageService} from 'primeng/api';
 import {ConfirmDialogModule} from 'primeng/confirmdialog';
 import {RouterModule} from '@angular/router';
@@ -38,10 +36,7 @@ import {TooltipModule} from 'primeng/tooltip';
     RouterModule,
     TooltipModule,
   ],
-  exports: [
-    CadastroAlunoComponent,
-    ListaAlunoComponent
-  ],
+  exports: [],
   providers: [MessageService, ConfirmationService]
 })
 export class AlunoModule {
