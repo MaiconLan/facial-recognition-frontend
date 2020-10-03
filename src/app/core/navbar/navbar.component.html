@@ -4,15 +4,14 @@
       <div class="p-col-12 p-md-12 p-lg-12">
         <a href="javascript:"><i class="pi pi-bars toggle" (click)="exibindoMenu = !exibindoMenu"></i></a>
       </div>
-
     </div>
   </div>
 
   <ul class="navbar-menu" *ngIf="exibindoMenu">
     <li class="navbar-usuario">Maicon Lanzendorf</li>
-    <li class="navbar-menuitem"><a href="#">Alunos</a></li>
-    <li class="navbar-menuitem"><a href="#">Professores</a></li>
-    <li class="navbar-menuitem"><a href="#">Coordenadores</a></li>
-    <li class="navbar-menuitem"><a href="#">Sair</a></li>
+    <li class="navbar-menuitem" routerLinkActive="ativo"><a routerLink="/aluno">Alunos</a></li>
+    <li class="navbar-menuitem" routerLinkActive="ativo"><a routerLink="/professor">Professores</a></li>
+    <li class="navbar-menuitem" routerLinkActive="ativo"><a routerLink="#">Coordenadores</a></li>
+    <li class="navbar-menuitem"><a routerLink="#">Sair</a></li>
   </ul>
 </nav>

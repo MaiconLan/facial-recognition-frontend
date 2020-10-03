@@ -13,7 +13,7 @@ export class InputMessageComponent {
   @Input() text: string;
 
   temErro(): boolean {
-    return this.control.hasError(this.error) && this.control.dirty;
+    return this.control?.hasError(this.error) && this.control.dirty;
   }
 
 }

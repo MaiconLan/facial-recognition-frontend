@@ -9,7 +9,11 @@ import {FormsModule} from '@angular/forms';
 import {SelectButtonModule} from 'primeng/selectbutton';
 import {PasswordModule} from 'primeng/password';
 import {SharedModule} from '../shared/shared.module';
-import {HttpClient, HttpClientModule} from '@angular/common/http';
+import {HttpClientModule} from '@angular/common/http';
+import {ConfirmationService, MessageService} from 'primeng/api';
+import {ConfirmDialogModule} from 'primeng/confirmdialog';
+import {RouterModule} from '@angular/router';
+import {TooltipModule} from 'primeng/tooltip';
 
 
 @NgModule({
@@ -26,12 +30,14 @@ import {HttpClient, HttpClientModule} from '@angular/common/http';
     SelectButtonModule,
     PasswordModule,
     SharedModule,
-    HttpClientModule
+    HttpClientModule,
+
+    ConfirmDialogModule,
+    RouterModule,
+    TooltipModule,
   ],
-  exports: [
-    CadastroAlunoComponent,
-    ListaAlunoComponent
-  ]
+  exports: [],
+  providers: [MessageService, ConfirmationService]
 })
 export class AlunoModule {
 }

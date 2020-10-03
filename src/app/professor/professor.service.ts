@@ -1,11 +1,10 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
-import {Aluno} from '../core/model';
+import {Aluno, Professor} from '../core/model';
 
-export class AlunoFiltro {
+export class ProfessorFiltro {
   nome: string;
   email: string;
-  matricula: string;
   pagina = 0;
   itensPorPagina = 10;
 }
@@ -13,14 +12,13 @@ export class AlunoFiltro {
 @Injectable({
   providedIn: 'root'
 })
-export class AlunoService {
+export class ProfessorService {
 
-  url = 'http://localhost:8080/aluno';
+  url = 'http://localhost:8080/professor';
 
-  constructor(private http: HttpClient) {
-  }
+  constructor(private http: HttpClient) { }
 
-  consultar(filtro: AlunoFiltro): Promise<any> {
+  consultar(filtro: ProfessorFiltro): Promise<any> {
     const headers = new HttpHeaders().append('Authorization', 'Basic ' + btoa('admin:admin'));
     let params = new HttpParams();
 
@@ -30,19 +28,17 @@ export class AlunoService {
     if (filtro.nome) {
       params = params.set('nome', filtro.nome);
     }
+
     if (filtro.email) {
       params = params.set('email', filtro.email);
-    }
-    if (filtro.matricula) {
-      params = params.set('matricula', filtro.matricula);
     }
 
     return this.http.get(this.url, {headers, params})
       .toPromise()
       .then(response => response)
       .catch(error => {
-        return Promise.reject('Erro ao consultar alunos');
-      });
+      return Promise.reject('Erro ao consultar professores');
+    });
   }
 
   excluir(id: number): Promise<void> {
@@ -56,12 +52,12 @@ export class AlunoService {
       });
   }
 
-  criar(aluno: Aluno): Promise<any> {
+  criar(professor: Professor): Promise<any> {
     const headers = new HttpHeaders()
       .append('Authorization', 'Basic ' + btoa('admin:admin'))
       .append('Content-Type', 'application/json');
 
-    return this.http.post(`${this.url}`, JSON.stringify(aluno), {headers})
+    return this.http.post(`${this.url}`, JSON.stringify(professor), {headers})
       .toPromise()
       .then(response => {
         return response;
@@ -71,12 +67,12 @@ export class AlunoService {
       });
   }
 
-  atualizar(aluno: Aluno): Promise<any> {
+    atualizar(professor: Professor): Promise<any> {
     const headers = new HttpHeaders()
       .append('Authorization', 'Basic ' + btoa('admin:admin'))
       .append('Content-Type', 'application/json');
 
-    return this.http.put(`${this.url}/${aluno.idAluno}`, JSON.stringify(aluno), {headers})
+    return this.http.put(`${this.url}/${professor.idProfessor}`, JSON.stringify(professor), {headers})
       .toPromise()
       .then(response => {
         return response;

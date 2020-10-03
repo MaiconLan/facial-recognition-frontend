@@ -1,35 +1,31 @@
 import {Component, OnInit} from '@angular/core';
-import {Aluno} from '../../core/model';
-import {NgForm} from '@angular/forms';
-import {AlunoService} from '../aluno.service';
 import {MessageService} from 'primeng/api';
+import {ProfessorService} from '../professor.service';
+import {Professor} from '../../core/model';
+import {NgForm} from '@angular/forms';
 import {ActivatedRoute, Router} from '@angular/router';
-import {Title} from '@angular/platform-browser';
-
 
 @Component({
-  selector: 'app-cadastro-aluno',
-  templateUrl: './cadastro-aluno.component.html',
-  styleUrls: ['./cadastro-aluno.component.css']
+  selector: 'app-cadastro-professor',
+  templateUrl: './cadastro-professor.component.html',
+  styleUrls: ['./cadastro-professor.component.css']
 })
-export class CadastroAlunoComponent implements OnInit {
+export class CadastroProfessorComponent implements OnInit {
 
-  aluno = new Aluno();
+  professor = new Professor();
 
   status = [
     {label: 'Ativo', value: true},
     {label: 'Inativo', value: false},
   ];
 
-  constructor(private alunoService: AlunoService,
+  constructor(private professorService: ProfessorService,
               private messageService: MessageService,
               private rout: ActivatedRoute,
-              private router: Router,
-              private title: Title) {
+              private router: Router) {
   }
 
   ngOnInit(): void {
-    this.title.setTitle('Cadastro de alunos');
     const id = this.rout.snapshot.params.id;
 
     if (id) {
@@ -37,19 +33,18 @@ export class CadastroAlunoComponent implements OnInit {
     }
   }
 
-  editando(): boolean {
-    return Boolean(this.aluno.idAluno);
-  }
-
   buscar(id: number): void {
-    this.alunoService.buscar(id)
+    this.professorService.buscar(id)
       .then(response => {
-        this.aluno = response;
-        this.title.setTitle('Edição de alunos');
+        this.professor = response;
       }).catch(error => {
       console.log(error);
       this.addError('Erro ao buscar', error.error.mensagemUsuario);
     });
+  }
+
+  editando(): boolean {
+    return Boolean(this.professor.idProfessor);
   }
 
   salvar(): void {
@@ -61,18 +56,18 @@ export class CadastroAlunoComponent implements OnInit {
   }
 
   criar(): void {
-    this.alunoService.criar(this.aluno).then(aluno => {
+    this.professorService.criar(this.professor).then(professor => {
       this.addSuccess('Criado', 'Registro criado com sucesso');
-      this.router.navigate(['/aluno', aluno.idAluno]);
+      this.router.navigate(['/professor', professor.idProfessor]);
     }).catch(error => {
       this.addError('Erro ao criar', error.error.mensagemUsuario);
     });
   }
 
   atualizar(): void {
-    this.alunoService.atualizar(this.aluno).then(response => {
+    this.professorService.atualizar(this.professor).then(response => {
       this.addSuccess('Atualizado', 'Registro atualizado com sucesso');
-      this.aluno = response;
+      this.professor = response;
     }).catch(error => {
       this.addError('Erro ao atualizar', error.error.mensagemUsuario);
     });
@@ -90,10 +85,9 @@ export class CadastroAlunoComponent implements OnInit {
     form.reset();
 
     setTimeout(function(): void {
-      this.aluno = new Aluno();
+      this.professor = new Professor();
     }.bind(this), 1);
 
     this.router.navigate(['/aluno/novo']);
   }
 }
-
