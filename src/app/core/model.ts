@@ -11,7 +11,7 @@ export class Aluno {
 }
 
 export class Professor {
-  idAluno: number;
+  idProfessor: number;
   nome: string;
   email: string;
   usuario: string;

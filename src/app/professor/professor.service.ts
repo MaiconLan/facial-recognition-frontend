@@ -66,4 +66,34 @@ export class ProfessorService {
         return Promise.reject(error);
       });
   }
+
+    atualizar(professor: Professor): Promise<any> {
+    const headers = new HttpHeaders()
+      .append('Authorization', 'Basic ' + btoa('admin:admin'))
+      .append('Content-Type', 'application/json');
+
+    return this.http.put(`${this.url}/${professor.idProfessor}`, JSON.stringify(professor), {headers})
+      .toPromise()
+      .then(response => {
+        return response;
+      })
+      .catch(error => {
+        return Promise.reject(error);
+      });
+  }
+
+  buscar(id: number): Promise<any> {
+    const headers = new HttpHeaders()
+      .append('Authorization', 'Basic ' + btoa('admin:admin'))
+      .append('Content-Type', 'application/json');
+
+    return this.http.get(`${this.url}/${id}`, { headers })
+      .toPromise()
+      .then(response => {
+        return response;
+      })
+      .catch(error => {
+        return Promise.reject(error);
+      });
+  }
 }

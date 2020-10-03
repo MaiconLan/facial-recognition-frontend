@@ -25,17 +25,42 @@ export class CadastroProfessorComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    console.log(this.rout.snapshot.params.id);
+    const id = this.rout.snapshot.params.id;
+
+    if (id) {
+      this.buscar(id);
+    }
+  }
+
+  buscar(id: number): void {
+    this.professorService.buscar(id)
+      .then(response => {
+        this.professor = response;
+      }).catch(error => {
+      console.log(error);
+      this.addError('Erro ao buscar', error.error.mensagemUsuario);
+    });
   }
 
   salvar(form: NgForm): void {
-    this.professorService.salvar(this.professor).then(() => {
-      this.addSuccess('Salvo', 'Registro salvo com sucesso');
-      form.reset();
-      this.professor = new Professor();
-    }).catch(error => {
-      this.addError('Erro ao salvar', error.error.mensagemUsuario);
-    });
+    if (this.professor.idProfessor) {
+      this.professorService.atualizar(this.professor).then(() => {
+        this.addSuccess('Atualizado', 'Registro atualizado com sucesso');
+        form.reset();
+        this.professor = new Professor();
+      }).catch(error => {
+        this.addError('Erro ao atualizar', error.error.mensagemUsuario);
+      });
+
+    } else {
+      this.professorService.salvar(this.professor).then(() => {
+        this.addSuccess('Salvo', 'Registro salvo com sucesso');
+        form.reset();
+        this.professor = new Professor();
+      }).catch(error => {
+        this.addError('Erro ao salvar', error.error.mensagemUsuario);
+      });
+    }
   }
 
   addSuccess(title: string, message: string): void {

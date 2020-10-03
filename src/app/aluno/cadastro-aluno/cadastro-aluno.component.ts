@@ -27,6 +27,7 @@ export class CadastroAlunoComponent implements OnInit {
 
   ngOnInit(): void {
     const id = this.rout.snapshot.params.id;
+
     if (id) {
       this.buscar(id);
     }
@@ -35,13 +36,7 @@ export class CadastroAlunoComponent implements OnInit {
   buscar(id: number): void {
     this.alunoService.buscar(id)
       .then(response => {
-        this.aluno.idAluno = response.idAluno;
-        this.aluno.nome = response.nome;
-        this.aluno.email = response.email;
-        this.aluno.matricula = response.matricula;
-        this.aluno.usuario = response.usuario;
-        this.aluno.senha = response.senha;
-        this.aluno.status = response.status;
+        this.aluno = response;
       }).catch(error => {
         console.log(error);
         this.addError('Erro ao buscar', error.error.mensagemUsuario);
