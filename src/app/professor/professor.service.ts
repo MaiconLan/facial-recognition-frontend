@@ -52,7 +52,7 @@ export class ProfessorService {
       });
   }
 
-  salvar(professor: Professor): Promise<any> {
+  criar(professor: Professor): Promise<any> {
     const headers = new HttpHeaders()
       .append('Authorization', 'Basic ' + btoa('admin:admin'))
       .append('Content-Type', 'application/json');

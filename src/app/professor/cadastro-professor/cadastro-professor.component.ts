@@ -3,7 +3,7 @@ import {MessageService} from 'primeng/api';
 import {ProfessorService} from '../professor.service';
 import {Professor} from '../../core/model';
 import {NgForm} from '@angular/forms';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 
 @Component({
   selector: 'app-cadastro-professor',
@@ -21,7 +21,8 @@ export class CadastroProfessorComponent implements OnInit {
 
   constructor(private professorService: ProfessorService,
               private messageService: MessageService,
-              private rout: ActivatedRoute) {
+              private rout: ActivatedRoute,
+              private router: Router) {
   }
 
   ngOnInit(): void {
@@ -46,30 +47,29 @@ export class CadastroProfessorComponent implements OnInit {
     return Boolean(this.professor.idProfessor);
   }
 
-  salvar(form: NgForm): void {
+  salvar(): void {
     if (this.editando()) {
-      this.criar(form);
-    } else {
       this.atualizar();
+    } else {
+      this.criar();
     }
   }
 
-  criar(form: NgForm): void {
-    this.professorService.atualizar(this.professor).then(() => {
-      this.addSuccess('Atualizado', 'Registro atualizado com sucesso');
-      form.reset();
-      this.professor = new Professor();
+  criar(): void {
+    this.professorService.criar(this.professor).then(() => {
+      this.addSuccess('Criado', 'Registro criado com sucesso');
+      this.router.navigate(['/professor']);
     }).catch(error => {
-      this.addError('Erro ao atualizar', error.error.mensagemUsuario);
+      this.addError('Erro ao criar', error.error.mensagemUsuario);
     });
   }
 
   atualizar(): void {
-    this.professorService.salvar(this.professor).then(response => {
-      this.addSuccess('Salvo', 'Registro salvo com sucesso');
+    this.professorService.atualizar(this.professor).then(response => {
+      this.addSuccess('Atualizado', 'Registro atualizado com sucesso');
       this.professor = response;
     }).catch(error => {
-      this.addError('Erro ao salvar', error.error.mensagemUsuario);
+      this.addError('Erro ao atualizar', error.error.mensagemUsuario);
     });
   }
 

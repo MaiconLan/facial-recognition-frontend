@@ -3,7 +3,7 @@ import {Aluno} from '../../core/model';
 import {NgForm} from '@angular/forms';
 import {AlunoService} from '../aluno.service';
 import {MessageService} from 'primeng/api';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 
 
 @Component({
@@ -22,7 +22,8 @@ export class CadastroAlunoComponent implements OnInit {
 
   constructor(private alunoService: AlunoService,
               private messageService: MessageService,
-              private rout: ActivatedRoute) {
+              private rout: ActivatedRoute,
+              private router: Router) {
   }
 
   ngOnInit(): void {
@@ -47,30 +48,29 @@ export class CadastroAlunoComponent implements OnInit {
     });
   }
 
-  salvar(form: NgForm): void {
+  salvar(): void {
     if (this.editando()) {
-      this.criar(form);
-    } else {
       this.atualizar();
+    } else {
+      this.criar();
     }
   }
 
-  criar(form: NgForm): void {
-    this.alunoService.atualizar(this.aluno).then(() => {
-      this.addSuccess('Atualizado', 'Registro atualizado com sucesso');
-      form.reset();
-      this.aluno = new Aluno();
+  criar(): void {
+    this.alunoService.criar(this.aluno).then(() => {
+      this.addSuccess('Criado', 'Registro criado com sucesso');
+      this.router.navigate(['/professor']);
     }).catch(error => {
-      this.addError('Erro ao atualizar', error.error.mensagemUsuario);
+      this.addError('Erro ao criar', error.error.mensagemUsuario);
     });
   }
 
   atualizar(): void {
-    this.alunoService.salvar(this.aluno).then(response => {
-      this.addSuccess('Salvo', 'Registro salvo com sucesso');
+    this.alunoService.atualizar(this.aluno).then(response => {
+      this.addSuccess('Atualizado', 'Registro atualizado com sucesso');
       this.aluno = response;
     }).catch(error => {
-      this.addError('Erro ao salvar', error.error.mensagemUsuario);
+      this.addError('Erro ao atualizar', error.error.mensagemUsuario);
     });
   }
 

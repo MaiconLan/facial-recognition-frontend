@@ -56,7 +56,7 @@ export class AlunoService {
       });
   }
 
-  salvar(aluno: Aluno): Promise<any> {
+  criar(aluno: Aluno): Promise<any> {
     const headers = new HttpHeaders()
       .append('Authorization', 'Basic ' + btoa('admin:admin'))
       .append('Content-Type', 'application/json');
