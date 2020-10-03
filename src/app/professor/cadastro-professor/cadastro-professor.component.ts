@@ -42,25 +42,35 @@ export class CadastroProfessorComponent implements OnInit {
     });
   }
 
-  salvar(form: NgForm): void {
-    if (this.professor.idProfessor) {
-      this.professorService.atualizar(this.professor).then(() => {
-        this.addSuccess('Atualizado', 'Registro atualizado com sucesso');
-        form.reset();
-        this.professor = new Professor();
-      }).catch(error => {
-        this.addError('Erro ao atualizar', error.error.mensagemUsuario);
-      });
+  editando(): boolean {
+    return Boolean(this.professor.idProfessor);
+  }
 
+  salvar(form: NgForm): void {
+    if (this.editando()) {
+      this.criar(form);
     } else {
-      this.professorService.salvar(this.professor).then(() => {
-        this.addSuccess('Salvo', 'Registro salvo com sucesso');
-        form.reset();
-        this.professor = new Professor();
-      }).catch(error => {
-        this.addError('Erro ao salvar', error.error.mensagemUsuario);
-      });
+      this.atualizar(form);
     }
+  }
+
+  criar(form: NgForm): void {
+    this.professorService.atualizar(this.professor).then(() => {
+      this.addSuccess('Atualizado', 'Registro atualizado com sucesso');
+      form.reset();
+      this.professor = new Professor();
+    }).catch(error => {
+      this.addError('Erro ao atualizar', error.error.mensagemUsuario);
+    });
+  }
+
+  atualizar(): void {
+    this.professorService.salvar(this.professor).then(response => {
+      this.addSuccess('Salvo', 'Registro salvo com sucesso');
+      this.professor = response;
+    }).catch(error => {
+      this.addError('Erro ao salvar', error.error.mensagemUsuario);
+    });
   }
 
   addSuccess(title: string, message: string): void {

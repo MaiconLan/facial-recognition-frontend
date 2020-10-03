@@ -33,6 +33,10 @@ export class CadastroAlunoComponent implements OnInit {
     }
   }
 
+  editando(): boolean {
+    return Boolean(this.aluno.idAluno);
+  }
+
   buscar(id: number): void {
     this.alunoService.buscar(id)
       .then(response => {
@@ -44,25 +48,30 @@ export class CadastroAlunoComponent implements OnInit {
   }
 
   salvar(form: NgForm): void {
-    if (this.aluno.idAluno) {
-      this.alunoService.atualizar(this.aluno).then(() => {
-        this.addSuccess('Atualizado', 'Registro atualizado com sucesso');
-        form.reset();
-        this.aluno = new Aluno();
-      }).catch(error => {
-        this.addError('Erro ao atualizar', error.error.mensagemUsuario);
-      });
-
+    if (this.editando()) {
+      this.criar(form);
     } else {
-      this.alunoService.salvar(this.aluno).then(() => {
-        this.addSuccess('Salvo', 'Registro salvo com sucesso');
-        form.reset();
-        this.aluno = new Aluno();
-      }).catch(error => {
-        this.addError('Erro ao salvar', error.error.mensagemUsuario);
-      });
+      this.atualizar();
     }
+  }
 
+  criar(form: NgForm): void {
+    this.alunoService.atualizar(this.aluno).then(() => {
+      this.addSuccess('Atualizado', 'Registro atualizado com sucesso');
+      form.reset();
+      this.aluno = new Aluno();
+    }).catch(error => {
+      this.addError('Erro ao atualizar', error.error.mensagemUsuario);
+    });
+  }
+
+  atualizar(): void {
+    this.alunoService.salvar(this.aluno).then(response => {
+      this.addSuccess('Salvo', 'Registro salvo com sucesso');
+      this.aluno = response;
+    }).catch(error => {
+      this.addError('Erro ao salvar', error.error.mensagemUsuario);
+    });
   }
 
   addSuccess(title: string, message: string): void {
