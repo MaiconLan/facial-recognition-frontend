@@ -50,7 +50,7 @@ export class CadastroProfessorComponent implements OnInit {
     if (this.editando()) {
       this.criar(form);
     } else {
-      this.atualizar(form);
+      this.atualizar();
     }
   }
 
