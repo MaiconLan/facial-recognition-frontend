@@ -8,7 +8,7 @@
   </div>
 
   <ul class="navbar-menu" *ngIf="exibindoMenu">
-    <li class="navbar-usuario">Maicon Lanzendorf</li>
+    <li class="navbar-usuario">{{ authService.jwtPayload?.nome }}</li>
     <li class="navbar-menuitem" routerLinkActive="ativo"><a routerLink="/aluno">Alunos</a></li>
     <li class="navbar-menuitem" routerLinkActive="ativo"><a routerLink="/professor">Professores</a></li>
     <li class="navbar-menuitem" routerLinkActive="ativo"><a routerLink="#">Coordenadores</a></li>

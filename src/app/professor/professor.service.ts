@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
-import {Aluno, Professor} from '../core/model';
+import {Professor} from '../core/model';
 
 export class ProfessorFiltro {
   nome: string;
@@ -14,7 +14,7 @@ export class ProfessorFiltro {
 })
 export class ProfessorService {
 
-  url = 'http://localhost:8080/professor';
+  url = 'http://localhost:8080/reconhecimento/professor';
 
   constructor(private http: HttpClient) { }
 

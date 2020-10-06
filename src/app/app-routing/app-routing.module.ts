@@ -6,9 +6,11 @@ import {CadastroAlunoComponent} from '../aluno/cadastro-aluno/cadastro-aluno.com
 import {ListaProfessorComponent} from '../professor/lista-professor/lista-professor.component';
 import {CadastroProfessorComponent} from '../professor/cadastro-professor/cadastro-professor.component';
 import {PaginaNaoEncontradaComponent} from '../core/pagina-nao-encontrada/pagina-nao-encontrada.component';
+import {LoginFormComponent} from '../seguranca/login-form/login-form.component';
 
 const routes: Routes = [
-  {path: '', redirectTo: 'aluno', pathMatch: 'full'},
+  {path: '', redirectTo: 'login', pathMatch: 'full'},
+  {path: 'login', component: LoginFormComponent},
   {path: 'aluno', component: ListaAlunoComponent},
   {path: 'aluno/novo', component: CadastroAlunoComponent},
   {path: 'aluno/:id', component: CadastroAlunoComponent},
