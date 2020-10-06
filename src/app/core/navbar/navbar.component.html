@@ -19,9 +19,15 @@
         <i class="pi pi-bars toggle" *ngIf="mostrarBotaoMenu()" (click)="exibindoMenu = !exibindoMenu"></i>
       </a>
     </li>
-    <li class="navbar-menuitem" routerLinkActive="ativo"><a routerLink="/aluno">Alunos</a></li>
-    <li class="navbar-menuitem" routerLinkActive="ativo"><a routerLink="/professor">Professores</a></li>
-    <li class="navbar-menuitem" routerLinkActive="ativo"><a routerLink="#">Coordenadores</a></li>
+    <li class="navbar-menuitem" routerLinkActive="ativo">
+      <a routerLink="/aluno" *ngIf="mostrarBotaoMenu()" (click)="exibindoMenu = !exibindoMenu">Alunos</a>
+    </li>
+    <li class="navbar-menuitem" routerLinkActive="ativo">
+      <a routerLink="/professor" *ngIf="mostrarBotaoMenu()" (click)="exibindoMenu = !exibindoMenu">Professores</a>
+    </li>
+    <li class="navbar-menuitem" routerLinkActive="ativo">
+      <a routerLink="#" *ngIf="mostrarBotaoMenu()" (click)="exibindoMenu = !exibindoMenu">Coordenadores</a>
+    </li>
     <li class="navbar-menuitem"><a routerLink="#" (click)="logout()">Logout</a></li>
   </ul>
 </nav>
