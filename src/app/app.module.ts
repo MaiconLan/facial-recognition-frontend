@@ -1,7 +1,6 @@
 import {NgModule} from '@angular/core';
 
 import {AppComponent} from './app.component';
-import {FormsModule} from '@angular/forms';
 import {MessageModule} from 'primeng/message';
 import {ButtonModule} from 'primeng/button';
 import {TableModule} from 'primeng/table';
@@ -18,14 +17,16 @@ import {ConfirmDialogModule} from 'primeng/confirmdialog';
 import {ToastModule} from 'primeng/toast';
 import {ConfirmationService, MessageService} from 'primeng/api';
 import {AppRoutingModule} from './app-routing/app-routing.module';
+import {SegurancaModule} from './seguranca/seguranca.module';
+import { NaoAutorizadoComponent } from './nao-autorizado/nao-autorizado.component';
 
 @NgModule({
   declarations: [
     AppComponent,
+    NaoAutorizadoComponent,
   ],
   imports: [
     BrowserModule,
-    FormsModule,
     MessageModule,
     ButtonModule,
     TableModule,
@@ -41,7 +42,8 @@ import {AppRoutingModule} from './app-routing/app-routing.module';
     ConfirmDialogModule,
     ToastModule,
     MessageModule,
-    AppRoutingModule
+    AppRoutingModule,
+    SegurancaModule,
   ],
   providers: [MessageService, ConfirmationService],
   bootstrap: [AppComponent]

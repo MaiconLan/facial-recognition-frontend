@@ -1,6 +1,7 @@
 import {Component} from '@angular/core';
 import {ProfessorFiltro, ProfessorService} from '../professor.service';
 import {ConfirmationService, LazyLoadEvent, MessageService} from 'primeng/api';
+import {ErrorHandlerService} from '../../core/error-handler.service';
 
 @Component({
   selector: 'app-lista-professor',
@@ -18,7 +19,8 @@ export class ListaProfessorComponent {
 
   constructor(private professorService: ProfessorService,
               private messageService: MessageService,
-              private confirmation: ConfirmationService) {
+              private confirmation: ConfirmationService,
+              private handler: ErrorHandlerService) {
   }
 
   consultar(pagina = 0): void {
@@ -34,7 +36,7 @@ export class ListaProfessorComponent {
           this.professores = response.content;
         }
       }).catch(error => {
-      this.addError('Erro', error.error.mensagemUsuario);
+      this.handler.handle(error);
       this.cleanList();
     });
 
@@ -67,7 +69,7 @@ export class ListaProfessorComponent {
       this.consultar(this.filtro.pagina);
       this.addSuccess('Sucesso', 'Registro excluído com sucesso');
     }).catch(error => {
-      this.addError('Erro', error.error.mensagemUsuario);;
+      this.handler.handle(error);
     });
     this.loading = false;
   }
@@ -79,10 +81,6 @@ export class ListaProfessorComponent {
 
   addSuccess(title: string, message: string): void {
     this.messageService.add({severity: 'success', summary: title, detail: message, life: 3000});
-  }
-
-  addError(title: string, message: string): void {
-    this.messageService.add({severity: 'error', summary: title, detail: message, life: 3000});
   }
 
 }

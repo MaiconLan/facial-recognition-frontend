@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {AlunoFiltro, AlunoService} from '../aluno.service';
 import {ConfirmationService, LazyLoadEvent, MessageService} from 'primeng/api';
 import {Title} from '@angular/platform-browser';
+import {ErrorHandlerService} from '../../core/error-handler.service';
 
 @Component({
   selector: 'app-lista-aluno',
@@ -20,6 +21,7 @@ export class ListaAlunoComponent implements OnInit {
   constructor(private alunoService: AlunoService,
               private messageService: MessageService,
               private confirmation: ConfirmationService,
+              private handler: ErrorHandlerService,
               private title: Title) {
   }
 
@@ -40,7 +42,7 @@ export class ListaAlunoComponent implements OnInit {
           this.alunos = response.content;
         }
       }).catch(error => {
-      this.addError('Erro', error.error.mensagemUsuario);
+      this.handler.handle(error);
       this.cleanList();
     });
 
@@ -78,17 +80,13 @@ export class ListaAlunoComponent implements OnInit {
       this.consultar(this.filtro.pagina);
       this.addSuccess('Sucesso', 'Registro excluído com sucesso');
     }).catch(error => {
-      this.addError('Erro', error.error.mensagemUsuario);
+      this.handler.handle(error);
     });
     this.loading = false;
   }
 
   addSuccess(title: string, message: string): void {
     this.messageService.add({severity: 'success', summary: title, detail: message, life: 3000});
-  }
-
-  addError(title: string, message: string): void {
-    this.messageService.add({severity: 'error', summary: title, detail: message, life: 3000});
   }
 
 }

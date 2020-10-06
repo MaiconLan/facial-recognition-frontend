@@ -5,6 +5,7 @@ import {AlunoService} from '../aluno.service';
 import {MessageService} from 'primeng/api';
 import {ActivatedRoute, Router} from '@angular/router';
 import {Title} from '@angular/platform-browser';
+import {ErrorHandlerService} from '../../core/error-handler.service';
 
 
 @Component({
@@ -25,7 +26,8 @@ export class CadastroAlunoComponent implements OnInit {
               private messageService: MessageService,
               private rout: ActivatedRoute,
               private router: Router,
-              private title: Title) {
+              private title: Title,
+              private handler: ErrorHandlerService) {
   }
 
   ngOnInit(): void {
@@ -47,8 +49,7 @@ export class CadastroAlunoComponent implements OnInit {
         this.aluno = response;
         this.title.setTitle('Edição de alunos');
       }).catch(error => {
-      console.log(error);
-      this.addError('Erro ao buscar', error.error.mensagemUsuario);
+      this.handler.handle(error);
     });
   }
 
@@ -65,7 +66,7 @@ export class CadastroAlunoComponent implements OnInit {
       this.addSuccess('Criado', 'Registro criado com sucesso');
       this.router.navigate(['/aluno', aluno.idAluno]);
     }).catch(error => {
-      this.addError('Erro ao criar', error.error.mensagemUsuario);
+      this.handler.handle(error);
     });
   }
 
@@ -74,16 +75,12 @@ export class CadastroAlunoComponent implements OnInit {
       this.addSuccess('Atualizado', 'Registro atualizado com sucesso');
       this.aluno = response;
     }).catch(error => {
-      this.addError('Erro ao atualizar', error.error.mensagemUsuario);
+      this.handler.handle(error);
     });
   }
 
   addSuccess(title: string, message: string): void {
     this.messageService.add({severity: 'success', summary: title, detail: message, life: 3000});
-  }
-
-  addError(title: string, message: string): void {
-    this.messageService.add({severity: 'error', summary: title, detail: message, life: 3000});
   }
 
   novo(form: NgForm): void {

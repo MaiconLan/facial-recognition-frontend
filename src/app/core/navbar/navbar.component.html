@@ -1,17 +1,33 @@
 <nav class="navbar">
   <div class="container">
     <div class="p-grid">
-      <div class="p-col-12 p-md-12 p-lg-12">
-        <a href="javascript:"><i class="pi pi-bars toggle" (click)="exibindoMenu = !exibindoMenu"></i></a>
+
+      <div class="p-col-3 p-md-3 p-lg-3">
+        <a href="javascript:"><i class="pi pi-bars toggle icon-menu" *ngIf="mostrarBotaoMenu() && !exibindoMenu"
+                                 (click)="exibindoMenu = !exibindoMenu"></i></a>
+      </div>
+      <div class="p-col-3 p-md-3 p-lg-3">
+        <p class="title">FACIAL RECOGNITION</p>
       </div>
     </div>
   </div>
 
   <ul class="navbar-menu" *ngIf="exibindoMenu">
-    <li class="navbar-usuario">Maicon Lanzendorf</li>
-    <li class="navbar-menuitem" routerLinkActive="ativo"><a routerLink="/aluno">Alunos</a></li>
-    <li class="navbar-menuitem" routerLinkActive="ativo"><a routerLink="/professor">Professores</a></li>
-    <li class="navbar-menuitem" routerLinkActive="ativo"><a routerLink="#">Coordenadores</a></li>
-    <li class="navbar-menuitem"><a routerLink="#">Sair</a></li>
+    <li class="navbar-usuario">
+      {{ authService.jwtPayload?.nome }}
+      <a href="javascript:" style="margin-left: 10px;">
+        <i class="pi pi-bars toggle" *ngIf="mostrarBotaoMenu()" (click)="exibindoMenu = !exibindoMenu"></i>
+      </a>
+    </li>
+    <li class="navbar-menuitem" routerLinkActive="ativo">
+      <a routerLink="/aluno" *ngIf="mostrarBotaoMenu()" (click)="exibindoMenu = !exibindoMenu">Alunos</a>
+    </li>
+    <li class="navbar-menuitem" routerLinkActive="ativo">
+      <a routerLink="/professor" *ngIf="mostrarBotaoMenu()" (click)="exibindoMenu = !exibindoMenu">Professores</a>
+    </li>
+    <li class="navbar-menuitem" routerLinkActive="ativo">
+      <a routerLink="#" *ngIf="mostrarBotaoMenu()" (click)="exibindoMenu = !exibindoMenu">Coordenadores</a>
+    </li>
+    <li class="navbar-menuitem"><a routerLink="#" (click)="logout()">Logout</a></li>
   </ul>
 </nav>
