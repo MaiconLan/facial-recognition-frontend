@@ -6,7 +6,7 @@ export const environment = {
   production: false,
   apiUrl: 'http://localhost:8080/reconhecimento',
   allowedDomains: [/localhost:8080/],
-  disallowedRoutes: [/\/oauth\/token/]
+  disallowedRoutes: [/localhost:8080\/oauth\/token/]
 };
 
 /*
