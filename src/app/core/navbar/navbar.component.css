@@ -1,3 +1,14 @@
+.title {
+  text-align: center;
+  font-weight: bold;
+  color: white;
+}
+
+.icon-menu {
+  margin-top: 15px;
+  font-size: 1.3rem;
+}
+
 .navbar {
   background-color: #1e94d2;
   padding: 10px 0;
@@ -33,7 +44,6 @@
 
 .navbar-menuitem {
   padding: 15px;
-
   color: #fff;
 }
 
