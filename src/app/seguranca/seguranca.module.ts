@@ -8,6 +8,8 @@ import {FormsModule} from '@angular/forms';
 import {HttpClientModule} from '@angular/common/http';
 import {JwtModule} from '@auth0/angular-jwt';
 import {environment} from '../../environments/environment';
+import {AuthGuard} from './auth.guard';
+import {LogoutService} from './logout.service';
 
 export function tokenGetter(): string {
   return localStorage.getItem('token');
@@ -30,7 +32,7 @@ export function tokenGetter(): string {
       }
     })
   ],
-  providers: []
+  providers: [AuthGuard, LogoutService]
 })
 export class SegurancaModule {
 }
