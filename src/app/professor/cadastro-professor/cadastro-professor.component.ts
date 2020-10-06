@@ -4,6 +4,7 @@ import {ProfessorService} from '../professor.service';
 import {Professor} from '../../core/model';
 import {NgForm} from '@angular/forms';
 import {ActivatedRoute, Router} from '@angular/router';
+import {ErrorHandlerService} from '../../core/error-handler.service';
 
 @Component({
   selector: 'app-cadastro-professor',
@@ -22,7 +23,8 @@ export class CadastroProfessorComponent implements OnInit {
   constructor(private professorService: ProfessorService,
               private messageService: MessageService,
               private rout: ActivatedRoute,
-              private router: Router) {
+              private router: Router,
+              private handler: ErrorHandlerService) {
   }
 
   ngOnInit(): void {
@@ -39,7 +41,7 @@ export class CadastroProfessorComponent implements OnInit {
         this.professor = response;
       }).catch(error => {
       console.log(error);
-      this.addError('Erro ao buscar', error.error.mensagemUsuario);
+      this.handler.handle(error);
     });
   }
 
@@ -60,7 +62,7 @@ export class CadastroProfessorComponent implements OnInit {
       this.addSuccess('Criado', 'Registro criado com sucesso');
       this.router.navigate(['/professor', professor.idProfessor]);
     }).catch(error => {
-      this.addError('Erro ao criar', error.error.mensagemUsuario);
+      this.handler.handle(error);
     });
   }
 
@@ -69,16 +71,12 @@ export class CadastroProfessorComponent implements OnInit {
       this.addSuccess('Atualizado', 'Registro atualizado com sucesso');
       this.professor = response;
     }).catch(error => {
-      this.addError('Erro ao atualizar', error.error.mensagemUsuario);
+      this.handler.handle(error);
     });
   }
 
   addSuccess(title: string, message: string): void {
     this.messageService.add({severity: 'success', summary: title, detail: message, life: 3000});
-  }
-
-  addError(title: string, message: string): void {
-    this.messageService.add({severity: 'error', summary: title, detail: message, life: 3000});
   }
 
   novo(form: NgForm): void {

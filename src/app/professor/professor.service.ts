@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
-import {Professor} from '../core/model';
+import {Aluno, Professor} from '../core/model';
 import {environment} from '../../environments/environment';
 
 export class ProfessorFiltro {
@@ -22,7 +22,7 @@ export class ProfessorService {
   }
 
   consultar(filtro: ProfessorFiltro): Promise<any> {
-    const headers = new HttpHeaders().append('Authorization', 'Basic ' + btoa('admin:admin'));
+    const headers = new HttpHeaders().append('Content-Type', 'application/json');
     let params = new HttpParams();
 
     params = params.set('page', filtro.pagina.toString());
@@ -36,7 +36,7 @@ export class ProfessorService {
       params = params.set('email', filtro.email);
     }
 
-    return this.http.get(this.url, {headers, params})
+    return this.http.get<any>(this.url, {headers, params})
       .toPromise()
       .then(response => response)
       .catch(error => {
@@ -45,9 +45,10 @@ export class ProfessorService {
   }
 
   excluir(id: number): Promise<void> {
-    const headers = new HttpHeaders().append('Authorization', 'Basic ' + btoa('admin:admin'));
+    const headers = new HttpHeaders()
+      .append('Content-Type', 'application/json');
 
-    return this.http.delete(`${this.url}/${id}`, {headers})
+    return this.http.delete(`${this.url}/${id}`, {headers })
       .toPromise()
       .then(() => null)
       .catch(error => {
@@ -57,10 +58,9 @@ export class ProfessorService {
 
   criar(professor: Professor): Promise<any> {
     const headers = new HttpHeaders()
-      .append('Authorization', 'Basic ' + btoa('admin:admin'))
       .append('Content-Type', 'application/json');
 
-    return this.http.post(`${this.url}`, JSON.stringify(professor), {headers})
+    return this.http.post<any>(`${this.url}`, JSON.stringify(professor), {headers})
       .toPromise()
       .then(response => {
         return response;
@@ -72,10 +72,9 @@ export class ProfessorService {
 
     atualizar(professor: Professor): Promise<any> {
     const headers = new HttpHeaders()
-      .append('Authorization', 'Basic ' + btoa('admin:admin'))
       .append('Content-Type', 'application/json');
 
-    return this.http.put(`${this.url}/${professor.idProfessor}`, JSON.stringify(professor), {headers})
+    return this.http.put<any>(`${this.url}/${professor.idProfessor}`, JSON.stringify(professor), {headers })
       .toPromise()
       .then(response => {
         return response;
@@ -87,10 +86,9 @@ export class ProfessorService {
 
   buscar(id: number): Promise<any> {
     const headers = new HttpHeaders()
-      .append('Authorization', 'Basic ' + btoa('admin:admin'))
       .append('Content-Type', 'application/json');
 
-    return this.http.get(`${this.url}/${id}`, { headers })
+    return this.http.get<any>(`${this.url}/${id}`, { headers  })
       .toPromise()
       .then(response => {
         return response;

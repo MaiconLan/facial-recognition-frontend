@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {HttpParams} from '@angular/common/http';
+import {HttpHeaders, HttpParams} from '@angular/common/http';
 import {Aluno} from '../core/model';
 import {FacialHttp} from '../seguranca/facial-http';
 import {environment} from '../../environments/environment';
@@ -24,6 +24,8 @@ export class AlunoService {
   }
 
   consultar(filtro: AlunoFiltro): Promise<any> {
+    const headers = new HttpHeaders()
+      .append('Content-Type', 'application/json');
     let params = new HttpParams();
 
     params = params.set('page', filtro.pagina.toString());
@@ -39,7 +41,7 @@ export class AlunoService {
       params = params.set('matricula', filtro.matricula);
     }
 
-    return this.http.get(this.url, {params})
+    return this.http.get<any>(this.url, {params, headers})
       .toPromise()
       .then(response => response)
       .catch(error => {
@@ -48,7 +50,10 @@ export class AlunoService {
   }
 
   excluir(id: number): Promise<void> {
-    return this.http.delete(`${this.url}/${id}`)
+    const headers = new HttpHeaders()
+      .append('Content-Type', 'application/json');
+
+    return this.http.delete(`${this.url}/${id}`, {headers})
       .toPromise()
       .then(() => null)
       .catch(error => {
@@ -57,8 +62,10 @@ export class AlunoService {
   }
 
   criar(aluno: Aluno): Promise<any> {
+    const headers = new HttpHeaders()
+      .append('Content-Type', 'application/json');
 
-    return this.http.post(`${this.url}`, JSON.stringify(aluno))
+    return this.http.post<any>(`${this.url}`, JSON.stringify(aluno), {headers})
       .toPromise()
       .then(response => {
         return response;
@@ -69,8 +76,10 @@ export class AlunoService {
   }
 
   atualizar(aluno: Aluno): Promise<any> {
+    const headers = new HttpHeaders()
+      .append('Content-Type', 'application/json');
 
-    return this.http.put(`${this.url}/${aluno.idAluno}`, JSON.stringify(aluno))
+    return this.http.put<any>(`${this.url}/${aluno.idAluno}`, JSON.stringify(aluno), {headers})
       .toPromise()
       .then(response => {
         return response;
@@ -81,7 +90,10 @@ export class AlunoService {
   }
 
   buscar(id: number): Promise<any> {
-    return this.http.get(`${this.url}/${id}`, )
+    const headers = new HttpHeaders()
+      .append('Content-Type', 'application/json');
+
+    return this.http.get<any>(`${this.url}/${id}`, {headers})
       .toPromise()
       .then(response => {
         return response;
