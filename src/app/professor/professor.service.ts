@@ -1,6 +1,7 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
 import {Professor} from '../core/model';
+import {environment} from '../../environments/environment';
 
 export class ProfessorFiltro {
   nome: string;
@@ -14,9 +15,11 @@ export class ProfessorFiltro {
 })
 export class ProfessorService {
 
-  url = 'http://localhost:8080/reconhecimento/professor';
+  url: string;
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {
+    this.url = `${environment.apiUrl}/professor`;
+  }
 
   consultar(filtro: ProfessorFiltro): Promise<any> {
     const headers = new HttpHeaders().append('Authorization', 'Basic ' + btoa('admin:admin'));

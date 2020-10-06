@@ -17,7 +17,7 @@ export class AlunoFiltro {
 })
 export class AlunoService {
 
-  url = 'http://localhost:8080/reconhecimento/aluno';
+  url: string;
 
   constructor(private http: FacialHttp) {
     this.url = `${environment.apiUrl}/aluno`;
