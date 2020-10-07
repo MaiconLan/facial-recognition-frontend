@@ -5,10 +5,6 @@
         <h1>{{editando() ? 'Editar' : 'Cadastrar'}} Aluno</h1>
       </div>
 
-      <div class="p-col-12 p-md-12 p-lg-12">
-        <p-selectButton [options]="status"></p-selectButton>
-      </div>
-
       <div class="p-col-12 p-md-6 p-lg-4">
         <label style="display: block">Nome:</label>
         <input pInputText type="text" name="nome" [(ngModel)]="aluno.nome" required>
@@ -27,12 +23,16 @@
 
       <div class="p-col-12 p-md-6 p-lg-4">
         <label style="display: block">Usuário:</label>
-        <input pInputText type="text" name="usuario" [(ngModel)]="aluno.usuario"/>
+        <input pInputText type="text" name="usuario" [(ngModel)]="aluno.usuario" required/>
       </div>
 
       <div class="p-col-12 p-md-6 p-lg-4">
         <label style="display: block">Senha:</label>
-        <input type="password" pPassword name="senha" [(ngModel)]="aluno.senha"/>
+        <input type="password" pPassword name="senha" [(ngModel)]="aluno.senha" [required]="!editando()"/>
+      </div>
+
+      <div class="p-col-12 p-md-12 p-lg-12">
+        <p-selectButton [options]="status" [hidden]="!editando()"></p-selectButton>
       </div>
 
       <div class="p-col-12 p-md-12 p-lg-12">
