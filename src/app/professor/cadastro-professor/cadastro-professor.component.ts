@@ -86,6 +86,6 @@ export class CadastroProfessorComponent implements OnInit {
       this.professor = new Professor();
     }.bind(this), 1);
 
-    this.router.navigate(['/aluno/novo']);
+    this.router.navigate(['/professor/novo']);
   }
 }
