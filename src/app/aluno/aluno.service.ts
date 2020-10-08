@@ -102,4 +102,16 @@ export class AlunoService {
         return Promise.reject(error);
       });
   }
+
+  listar(): Promise<any> {
+    const headers = new HttpHeaders()
+      .append('Content-Type', 'application/json');
+
+    return this.http.get<any>(this.url, {headers})
+      .toPromise()
+      .then(response => response)
+      .catch(error => {
+        return Promise.reject(error);
+      });
+  }
 }

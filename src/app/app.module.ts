@@ -19,6 +19,7 @@ import {ConfirmationService, MessageService} from 'primeng/api';
 import {AppRoutingModule} from './app-routing/app-routing.module';
 import {SegurancaModule} from './seguranca/seguranca.module';
 import { NaoAutorizadoComponent } from './nao-autorizado/nao-autorizado.component';
+import {TurmaModule} from './turma/turma.module';
 
 @NgModule({
   declarations: [
@@ -44,6 +45,7 @@ import { NaoAutorizadoComponent } from './nao-autorizado/nao-autorizado.componen
     MessageModule,
     AppRoutingModule,
     SegurancaModule,
+    TurmaModule
   ],
   providers: [MessageService, ConfirmationService],
   bootstrap: [AppComponent]
