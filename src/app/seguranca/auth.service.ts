@@ -22,18 +22,18 @@ export class AuthService {
     const headers = new HttpHeaders()
       .append('Authorization', 'Basic ' + btoa('angular:angular'))
       .append('Content-Type', 'application/x-www-form-urlencoded');
-
+    this.limparAcessToken();
     const body = `username=${usuario}&password=${senha}&grant_type=password`;
 
     return this.http.post<any>(this.oauthTokenUrl, body,
       { headers, withCredentials: true })
       .toPromise()
       .then(response => {
-        this.limparAcessToken();
         this.armazenarToken(response.access_token);
       })
       .catch(response => {
         this.limparAcessToken();
+
         if (response.status === 400) {
           if (response.error.error === 'invalid_grant') {
             return Promise.reject('Usuário ou senha inválida!');

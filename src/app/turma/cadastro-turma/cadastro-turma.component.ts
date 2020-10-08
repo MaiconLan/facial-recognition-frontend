@@ -42,15 +42,14 @@ export class CadastroTurmaComponent implements OnInit {
 
   ngOnInit(): void {
     this.title.setTitle('Cadastro de turma');
-
-    this.carregarDropdownProfessores();
-    this.carregarDropdownAlunos();
-
     const id = this.rout.snapshot.params.id;
 
     if (id) {
       this.buscar(id);
     }
+
+    this.carregarDropdownProfessores();
+    this.carregarDropdownAlunos();
   }
 
   private carregarDropdownProfessores(): void {
@@ -65,7 +64,12 @@ export class CadastroTurmaComponent implements OnInit {
   private carregarDropdownAlunos(): void {
     this.alunoService.listar()
       .then(resultado => {
-          this.alunos = resultado.content;
+        this.alunos = resultado.content;
+
+        for (const aluno of this.turma.alunos) {
+            const index = this.alunos.findIndex(a => a.idAluno === aluno.idAluno);
+            this.alunos.splice(index, 1);
+        }
       }).catch(error => this.handler.handle(error));
   }
 
