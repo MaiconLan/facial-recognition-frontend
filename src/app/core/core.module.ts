@@ -11,16 +11,21 @@ import {JwtHelperService} from '@auth0/angular-jwt';
 import {FacialHttp} from '../seguranca/facial-http';
 import {ErrorHandlerService} from './error-handler.service';
 import {HttpClientModule} from '@angular/common/http';
+import {SidebarComponent} from './sidebar/sidebar.component';
+import {SidebarModule} from 'primeng/sidebar';
+import {ButtonModule} from 'primeng/button';
 
 @NgModule({
-  declarations: [NavbarComponent, PaginaNaoEncontradaComponent],
+  declarations: [NavbarComponent, PaginaNaoEncontradaComponent, SidebarComponent],
   imports: [
     CommonModule,
     RouterModule,
-    HttpClientModule
+    HttpClientModule,
+    SidebarModule,
+    ButtonModule
   ],
   providers: [Title, ProfessorService, AlunoService, AuthService, JwtHelperService, FacialHttp, ErrorHandlerService],
-  exports: [NavbarComponent]
+  exports: [NavbarComponent, SidebarComponent]
 })
 export class CoreModule {
 }
