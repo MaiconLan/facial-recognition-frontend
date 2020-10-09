@@ -33,7 +33,7 @@ export class ErrorHandlerService {
       }
 
       try {
-        msg = errorResponse.error[0].mensagemUsuario;
+        msg = errorResponse.error.mensagemUsuario;
       } catch (e) {
       }
 

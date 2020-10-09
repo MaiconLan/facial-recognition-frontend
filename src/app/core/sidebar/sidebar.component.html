@@ -33,6 +33,10 @@
       </div>
 
       <div class="navbar-menuitem" routerLinkActive="ativo">
+        <a routerLink="/turma" *ngIf="mostrarBotaoMenu()" (click)="exibindoMenu = !exibindoMenu">Turmas</a>
+      </div>
+
+      <div class="navbar-menuitem" routerLinkActive="ativo">
         <a routerLink="#" (click)="logout()">Logout</a>
       </div>
 
