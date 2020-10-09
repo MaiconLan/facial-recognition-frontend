@@ -28,6 +28,9 @@
     <li class="navbar-menuitem" routerLinkActive="ativo">
       <a routerLink="#" *ngIf="mostrarBotaoMenu()" (click)="exibindoMenu = !exibindoMenu">Coordenadores</a>
     </li>
+    <li class="navbar-menuitem" routerLinkActive="ativo">
+      <a routerLink="/turma" *ngIf="mostrarBotaoMenu()" (click)="exibindoMenu = !exibindoMenu">Turmas</a>
+    </li>
     <li class="navbar-menuitem"><a routerLink="#" (click)="logout()">Logout</a></li>
   </ul>
 </nav>
