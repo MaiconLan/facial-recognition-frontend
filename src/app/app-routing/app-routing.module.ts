@@ -8,6 +8,8 @@ import {CadastroProfessorComponent} from '../professor/cadastro-professor/cadast
 import {PaginaNaoEncontradaComponent} from '../core/pagina-nao-encontrada/pagina-nao-encontrada.component';
 import {LoginFormComponent} from '../seguranca/login-form/login-form.component';
 import {AuthGuard} from '../seguranca/auth.guard';
+import {CadastroTurmaComponent} from '../turma/cadastro-turma/cadastro-turma.component';
+import {ListaTurmaComponent} from '../turma/lista-turma/lista-turma.component';
 
 const routes: Routes = [
   {path: '', redirectTo: 'login', pathMatch: 'full'},
@@ -18,6 +20,9 @@ const routes: Routes = [
   {path: 'professor', component: ListaProfessorComponent, canActivate: [AuthGuard]},
   {path: 'professor/novo', component: CadastroProfessorComponent, canActivate: [AuthGuard]},
   {path: 'professor/:id', component: CadastroProfessorComponent, canActivate: [AuthGuard]},
+  {path: 'turma', component: ListaTurmaComponent, canActivate: [AuthGuard]},
+  {path: 'turma/novo', component: CadastroTurmaComponent, canActivate: [AuthGuard]},
+  {path: 'turma/:id', component: CadastroTurmaComponent, canActivate: [AuthGuard]},
   {path: 'pagina-nao-encontrada', component: PaginaNaoEncontradaComponent, canActivate: [AuthGuard]},
   {path: '**', redirectTo: 'pagina-nao-encontrada'},
 ];

@@ -18,3 +18,14 @@ export class Professor {
   senha: string;
   status = true;
 }
+
+export class Turma {
+  idTurma: number;
+  materia: string;
+  ano: number;
+  periodo: string;
+  tipo: string;
+  finalizada: boolean;
+  professor: Professor;
+  alunos: Aluno[] = [];
+}

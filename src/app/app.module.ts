@@ -22,6 +22,7 @@ import {NaoAutorizadoComponent} from './nao-autorizado/nao-autorizado.component'
 import {LoadingBarHttpClientModule} from "@ngx-loading-bar/http-client";
 import {LoadingBarRouterModule} from "@ngx-loading-bar/router";
 import {LOADING_BAR_CONFIG, LoadingBarModule} from "@ngx-loading-bar/core";
+import {TurmaModule} from './turma/turma.module';
 
 @NgModule({
   declarations: [
@@ -49,12 +50,13 @@ import {LOADING_BAR_CONFIG, LoadingBarModule} from "@ngx-loading-bar/core";
     SegurancaModule,
     LoadingBarHttpClientModule,
     LoadingBarRouterModule,
-    LoadingBarModule
+    LoadingBarModule,
   ],
   providers: [
     MessageService,
     ConfirmationService,
     {provide: LOADING_BAR_CONFIG, useValue: {latencyThreshold: 100}},
+    TurmaModule,
   ],
   bootstrap: [AppComponent]
 })

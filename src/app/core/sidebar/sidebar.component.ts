@@ -5,11 +5,11 @@ import {ErrorHandlerService} from '../error-handler.service';
 import {Router} from '@angular/router';
 
 @Component({
-  selector: 'app-navbar',
-  templateUrl: './navbar.component.html',
-  styleUrls: ['./navbar.component.css']
+  selector: 'app-sidebar',
+  templateUrl: './sidebar.component.html',
+  styleUrls: ['./sidebar.component.css']
 })
-export class NavbarComponent implements OnInit {
+export class SidebarComponent implements OnInit {
 
   exibindoMenu: boolean;
 

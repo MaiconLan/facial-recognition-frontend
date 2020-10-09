@@ -40,7 +40,6 @@ export class CadastroProfessorComponent implements OnInit {
       .then(response => {
         this.professor = response;
       }).catch(error => {
-      console.log(error);
       this.handler.handle(error);
     });
   }
