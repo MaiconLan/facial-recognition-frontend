@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {TurmaFiltro, TurmaService} from "../turma.service";
 import {ConfirmationService, LazyLoadEvent, MessageService} from "primeng/api";
 import {ErrorHandlerService} from "../../core/error-handler.service";
+import {Title} from '@angular/platform-browser';
 
 @Component({
   selector: 'app-lista-turma',
@@ -28,9 +29,11 @@ export class ListaTurmaComponent implements OnInit {
   constructor(private turmaService: TurmaService,
               private handler: ErrorHandlerService,
               private confirmation: ConfirmationService,
-              private messageService: MessageService) { }
+              private messageService: MessageService,
+              private title: Title) { }
 
   ngOnInit(): void {
+    this.title.setTitle('Busca de turmas');
   }
 
   consultar(pagina = 0): void {
