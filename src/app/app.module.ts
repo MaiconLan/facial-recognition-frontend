@@ -18,7 +18,10 @@ import {ToastModule} from 'primeng/toast';
 import {ConfirmationService, MessageService} from 'primeng/api';
 import {AppRoutingModule} from './app-routing/app-routing.module';
 import {SegurancaModule} from './seguranca/seguranca.module';
-import { NaoAutorizadoComponent } from './nao-autorizado/nao-autorizado.component';
+import {NaoAutorizadoComponent} from './nao-autorizado/nao-autorizado.component';
+import {LoadingBarHttpClientModule} from "@ngx-loading-bar/http-client";
+import {LoadingBarRouterModule} from "@ngx-loading-bar/router";
+import {LOADING_BAR_CONFIG, LoadingBarModule} from "@ngx-loading-bar/core";
 import {TurmaModule} from './turma/turma.module';
 
 @NgModule({
@@ -45,9 +48,16 @@ import {TurmaModule} from './turma/turma.module';
     MessageModule,
     AppRoutingModule,
     SegurancaModule,
-    TurmaModule
+    LoadingBarHttpClientModule,
+    LoadingBarRouterModule,
+    LoadingBarModule,
   ],
-  providers: [MessageService, ConfirmationService],
+  providers: [
+    MessageService,
+    ConfirmationService,
+    {provide: LOADING_BAR_CONFIG, useValue: {latencyThreshold: 100}},
+    TurmaModule,
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {
