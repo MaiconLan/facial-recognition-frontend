@@ -1,6 +1,5 @@
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
-import {NavbarComponent} from './navbar/navbar.component';
 import {RouterModule} from '@angular/router';
 import {PaginaNaoEncontradaComponent} from './pagina-nao-encontrada/pagina-nao-encontrada.component';
 import {Title} from '@angular/platform-browser';
@@ -11,16 +10,21 @@ import {JwtHelperService} from '@auth0/angular-jwt';
 import {FacialHttp} from '../seguranca/facial-http';
 import {ErrorHandlerService} from './error-handler.service';
 import {HttpClientModule} from '@angular/common/http';
+import {SidebarComponent} from './sidebar/sidebar.component';
+import {SidebarModule} from 'primeng/sidebar';
+import {ButtonModule} from 'primeng/button';
 
 @NgModule({
-  declarations: [NavbarComponent, PaginaNaoEncontradaComponent],
+  declarations: [PaginaNaoEncontradaComponent, SidebarComponent],
   imports: [
     CommonModule,
     RouterModule,
-    HttpClientModule
+    HttpClientModule,
+    SidebarModule,
+    ButtonModule
   ],
   providers: [Title, ProfessorService, AlunoService, AuthService, JwtHelperService, FacialHttp, ErrorHandlerService],
-  exports: [NavbarComponent]
+  exports: [SidebarComponent]
 })
 export class CoreModule {
 }

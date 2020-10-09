@@ -18,21 +18,14 @@
   color: white;
 }
 
-.navbar-menu {
-  position: fixed;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  width: 250px;
-  margin: 0;
-  padding: 0;
-  z-index: 9998;
+::ng-deep .p-sidebar {
   background-color: #3a3633;
-
+  width: 100%;
+  height: 100%;
   list-style: none;
 }
 
-.navbar-usuario {
+::ng-deep .navbar-usuario {
   padding: 15px;
   margin-bottom: 15px;
   border-bottom: 1px solid #525151;
@@ -42,20 +35,20 @@
   color: #ffff;
 }
 
-.navbar-menuitem {
+::ng-deep .navbar-menuitem {
   padding: 15px;
   color: #fff;
 }
 
-.navbar-menuitem a {
+::ng-deep .navbar-menuitem a {
   color: #c0bbb7;
   text-decoration: none;
 }
 
-.navbar-menuitem a:hover {
+::ng-deep .navbar-menuitem a:hover {
   color: #fff;
 }
 
-.navbar-menuitem.ativo {
+::ng-deep .navbar-menuitem.ativo {
   background-color: #494541;
 }
