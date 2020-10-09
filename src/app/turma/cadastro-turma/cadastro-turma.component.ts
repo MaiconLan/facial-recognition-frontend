@@ -44,11 +44,12 @@ export class CadastroTurmaComponent implements OnInit {
     this.title.setTitle('Cadastro de turma');
     const id = this.rout.snapshot.params.id;
 
+    this.carregarDropdownProfessores();
+
     if (id) {
       this.buscar(id);
     }
 
-    this.carregarDropdownProfessores();
     this.carregarDropdownAlunos();
   }
 

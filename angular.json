@@ -123,6 +123,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "facial-recognition-frontend"
+    }
+  },
+  "defaultProject": "facial-recognition-frontend",
+  "cli": {
+    "analytics": false
+  }
 }
