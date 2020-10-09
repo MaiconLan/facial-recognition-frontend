@@ -52,27 +52,6 @@ export class CadastroTurmaComponent implements OnInit {
     this.carregarDropdownAlunos();
   }
 
-  private carregarDropdownProfessores(): void {
-    this.professorService.listar()
-      .then(resultado => {
-        for (const professor of resultado.content) {
-          this.professores.push({label: professor.nome, value: professor});
-        }
-      }).catch(error => this.handler.handle(error));
-  }
-
-  private carregarDropdownAlunos(): void {
-    this.alunoService.listar()
-      .then(resultado => {
-        this.alunos = resultado.content;
-
-        for (const aluno of this.turma.alunos) {
-            const index = this.alunos.findIndex(a => a.idAluno === aluno.idAluno);
-            this.alunos.splice(index, 1);
-        }
-      }).catch(error => this.handler.handle(error));
-  }
-
   salvar(): void {
     if (this.editando()) {
       this.atualizar();
@@ -109,6 +88,8 @@ export class CadastroTurmaComponent implements OnInit {
 
   novo(f: NgForm): void {
     this.turma = new Turma();
+    this.carregarDropdownAlunos();
+    this.carregarDropdownProfessores();
     f.reset();
     this.router.navigate(['turma/novo']);
   }
@@ -116,4 +97,33 @@ export class CadastroTurmaComponent implements OnInit {
   addSuccess(title: string, message: string): void {
     this.messageService.add({severity: 'success', summary: title, detail: message, life: 3000});
   }
+
+  private carregarDropdownProfessores(): void {
+    this.professorService.listar()
+      .then(response => {
+        if (response) {
+          for (const professor of response.content) {
+            this.professores.push({label: professor.nome, value: professor});
+          }
+        } else {
+          this.professores = [];
+        }
+      }).catch(error => this.handler.handle(error));
+  }
+
+  private carregarDropdownAlunos(): void {
+    this.alunoService.listar()
+      .then(response => {
+        if (response) {
+          this.alunos = response.content;
+          for (const aluno of this.turma.alunos) {
+            const index = this.alunos.findIndex(a => a.idAluno === aluno.idAluno);
+            this.alunos.splice(index, 1);
+          }
+        } else {
+          this.alunos = [];
+        }
+      }).catch(error => this.handler.handle(error));
+  }
+
 }

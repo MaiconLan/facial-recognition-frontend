@@ -109,7 +109,7 @@ export class AlunoService {
 
     return this.http.get<any>(this.url, {headers})
       .toPromise()
-      .then(response => response)
+      .then()
       .catch(error => {
         return Promise.reject(error);
       });

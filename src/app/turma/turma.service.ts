@@ -90,4 +90,16 @@ export class TurmaService {
         return Promise.reject(error);
       });
   }
+
+  excluir(id: number): Promise<void> {
+    const headers = new HttpHeaders()
+      .append('Content-Type', 'application/json');
+
+    return this.http.delete<any>(`${this.url}/${id}`, {headers})
+      .toPromise()
+      .then()
+      .catch(error => {
+        return Promise.reject(error);
+      });
+  }
 }

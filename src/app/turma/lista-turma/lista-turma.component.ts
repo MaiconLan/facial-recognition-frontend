@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {TurmaFiltro, TurmaService} from "../turma.service";
-import {ConfirmationService, LazyLoadEvent} from "primeng/api";
+import {ConfirmationService, LazyLoadEvent, MessageService} from "primeng/api";
 import {ErrorHandlerService} from "../../core/error-handler.service";
 
 @Component({
@@ -27,7 +27,8 @@ export class ListaTurmaComponent implements OnInit {
 
   constructor(private turmaService: TurmaService,
               private handler: ErrorHandlerService,
-              private confirmation: ConfirmationService) { }
+              private confirmation: ConfirmationService,
+              private messageService: MessageService) { }
 
   ngOnInit(): void {
   }
@@ -78,6 +79,13 @@ export class ListaTurmaComponent implements OnInit {
   }
 
   private excluir(turma: any): void {
+    this.turmaService.excluir(turma.idTurma).then(() => {
+      this.addSuccess('Excluío', 'Registro excluío com sucesso.');
+      this.consultar(this.filtro.pagina);
+    }).catch(error => this.handler.handle(error));
+  }
 
+  addSuccess(title: string, message: string): void {
+    this.messageService.add({severity: 'success', summary: title, detail: message, life: 3000});
   }
 }
