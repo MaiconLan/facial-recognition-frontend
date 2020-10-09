@@ -1,6 +1,5 @@
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
-import {NavbarComponent} from './navbar/navbar.component';
 import {RouterModule} from '@angular/router';
 import {PaginaNaoEncontradaComponent} from './pagina-nao-encontrada/pagina-nao-encontrada.component';
 import {Title} from '@angular/platform-browser';
@@ -16,7 +15,7 @@ import {SidebarModule} from 'primeng/sidebar';
 import {ButtonModule} from 'primeng/button';
 
 @NgModule({
-  declarations: [NavbarComponent, PaginaNaoEncontradaComponent, SidebarComponent],
+  declarations: [PaginaNaoEncontradaComponent, SidebarComponent],
   imports: [
     CommonModule,
     RouterModule,
@@ -25,7 +24,7 @@ import {ButtonModule} from 'primeng/button';
     ButtonModule
   ],
   providers: [Title, ProfessorService, AlunoService, AuthService, JwtHelperService, FacialHttp, ErrorHandlerService],
-  exports: [NavbarComponent, SidebarComponent]
+  exports: [SidebarComponent]
 })
 export class CoreModule {
 }
