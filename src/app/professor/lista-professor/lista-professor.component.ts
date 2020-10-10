@@ -2,6 +2,7 @@ import {Component} from '@angular/core';
 import {ProfessorFiltro, ProfessorService} from '../professor.service';
 import {ConfirmationService, LazyLoadEvent, MessageService} from 'primeng/api';
 import {ErrorHandlerService} from '../../core/error-handler.service';
+import {Title} from '@angular/platform-browser';
 
 @Component({
   selector: 'app-lista-professor',
@@ -20,7 +21,12 @@ export class ListaProfessorComponent {
   constructor(private professorService: ProfessorService,
               private messageService: MessageService,
               private confirmation: ConfirmationService,
-              private handler: ErrorHandlerService) {
+              private handler: ErrorHandlerService,
+              private title: Title) {
+  }
+
+  ngOnInit(): void {
+    this.title.setTitle('Busca de professores');
   }
 
   consultar(pagina = 0): void {

@@ -5,6 +5,7 @@ import {Professor} from '../../core/model';
 import {NgForm} from '@angular/forms';
 import {ActivatedRoute, Router} from '@angular/router';
 import {ErrorHandlerService} from '../../core/error-handler.service';
+import {Title} from '@angular/platform-browser';
 
 @Component({
   selector: 'app-cadastro-professor',
@@ -24,10 +25,12 @@ export class CadastroProfessorComponent implements OnInit {
               private messageService: MessageService,
               private rout: ActivatedRoute,
               private router: Router,
-              private handler: ErrorHandlerService) {
+              private handler: ErrorHandlerService,
+              private title: Title) {
   }
 
   ngOnInit(): void {
+    this.title.setTitle('Cadastro de professor');
     const id = this.rout.snapshot.params.id;
 
     if (id) {
