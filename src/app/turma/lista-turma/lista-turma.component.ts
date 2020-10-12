@@ -3,6 +3,8 @@ import {TurmaFiltro, TurmaService} from "../turma.service";
 import {ConfirmationService, LazyLoadEvent, MessageService} from "primeng/api";
 import {ErrorHandlerService} from "../../core/error-handler.service";
 import {Title} from '@angular/platform-browser';
+import {Turma} from "../../core/model";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-lista-turma',
@@ -30,6 +32,7 @@ export class ListaTurmaComponent implements OnInit {
               private handler: ErrorHandlerService,
               private confirmation: ConfirmationService,
               private messageService: MessageService,
+              private router: Router,
               private title: Title) { }
 
   ngOnInit(): void {
@@ -90,5 +93,9 @@ export class ListaTurmaComponent implements OnInit {
 
   addSuccess(title: string, message: string): void {
     this.messageService.add({severity: 'success', summary: title, detail: message, life: 3000});
+  }
+
+  acessarCalendario(turma: Turma): void {
+    this.router.navigate(['turma', turma.idTurma, 'calendario']);
   }
 }

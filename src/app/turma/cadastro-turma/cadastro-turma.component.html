@@ -35,7 +35,8 @@
 
       <div class="p-col-1 p-md-1 p-lg-1">
         <label for="finalizada" class="input-label">Finalizada</label>
-        <p-checkbox id="finalizada" name="finalizada" [(ngModel)]="turma.finalizada" [binary]="true" [style]="{'margin': '10px'}"></p-checkbox>
+        <p-checkbox id="finalizada" name="finalizada" [(ngModel)]="turma.finalizada" [binary]="true"
+                    [style]="{'margin': '10px'}"></p-checkbox>
       </div>
 
       <div class="p-col-12 p-md-12 p-lg-12">
@@ -60,13 +61,15 @@
 
       <div class="p-col-12 p-md-12 p-lg-12">
         <span class="p-buttonset">
-          <button pButton icon="pi pi-save" type="submit" class="p-button-success" label="Salvar" [disabled]="f.invalid"></button>
+          <button pButton icon="pi pi-save" type="submit" class="p-button-success" label="Salvar"
+                  [disabled]="f.invalid"></button>
           <button pButton icon="pi pi-plus" type="button" class="p-button-info" label="Novo"
                   (click)="novo(f)"></button>
+          <button pButton icon="pi pi-calendar" type="button" class="p-button-help" label="Calendário"
+                   (click)="acessarCalendario(turma)"></button>
         </span>
         <a routerLink="/turma" style="margin-left: 5px;">Voltar para a pesquisa</a>
       </div>
     </div>
-
   </form>
 </div>

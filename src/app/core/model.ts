@@ -1,4 +1,3 @@
-
 export class Aluno {
   idAluno: number;
   nome: string;
@@ -28,4 +27,12 @@ export class Turma {
   finalizada: boolean;
   professor: Professor;
   alunos: Aluno[] = [];
+}
+
+export class Aula {
+  id: number;
+  title: string;
+  start: Date;
+  end: Date;
+  turma: Turma;
 }

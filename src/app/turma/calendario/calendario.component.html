@@ -5,3 +5,38 @@
     </div>
   </div>
 </div>
+
+<p-dialog header="Agendar aula" [(visible)]="mostrarAula" [modal]="true" [resizable]="false" [contentStyle]="{'overflow': 'visible'}"
+          [closeOnEscape]="true" [draggable]="false">
+  <p-header>
+    {{turma.materia}}/{{turma.ano}} - {{turma.professor.nome}}
+  </p-header>
+
+  <div class="container">
+    <div class="p-grid">
+      <div class="p-col-12 p-md-12 p-lg-12">
+        <label style="display: block">Título:</label>
+        <input pInputText type="text" name="nome" [(ngModel)]="aula.title" required>
+      </div>
+
+      <div class="p-col-12 p-md-12 p-lg-12" [style]="{'width': '100%'}">
+        <label style="display: block">Início:</label>
+        <p-calendar [(ngModel)]="aula.start" [minDate]="minDate()" [readonlyInput]="true" required
+                    showTime="true" hourFormat="24" dateFormat="dd/mm/yy"></p-calendar>
+      </div>
+
+      <div class="p-col-12 p-md-4 p-lg-4" [style]="{'width': '100%'}">
+        <label style="display: block">Término:</label>
+        <p-calendar [disabled]="true" [(ngModel)]="aula.end" [minDate]="aula.start ? aula.start : minDate()" required
+                    [readonlyInput]="true" showTime="true" hourFormat="24"
+                    dateFormat="dd/mm/yy"></p-calendar>
+      </div>
+    </div>
+  </div>
+
+  <p-footer>
+    <button pButton icon="pi pi-save" type="submit" class="p-button-success" label="Salvar" (click)="salvarAula()"></button>
+    <button pButton icon="pi pi-times" type="submit" class="p-button-danger" label="Excluir" (click)="excluirAula()"></button>
+  </p-footer>
+
+</p-dialog>

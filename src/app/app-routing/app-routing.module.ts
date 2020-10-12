@@ -22,7 +22,7 @@ const routes: Routes = [
   {path: 'professor/novo', component: CadastroProfessorComponent, canActivate: [AuthGuard]},
   {path: 'professor/:id', component: CadastroProfessorComponent, canActivate: [AuthGuard]},
   {path: 'turma', component: ListaTurmaComponent, canActivate: [AuthGuard]},
-  {path: 'turma/calendario', component: CalendarioComponent, canActivate: [AuthGuard]},
+  {path: 'turma/:id/calendario', component: CalendarioComponent, canActivate: [AuthGuard]},
   {path: 'turma/novo', component: CadastroTurmaComponent, canActivate: [AuthGuard]},
   {path: 'turma/:id', component: CadastroTurmaComponent, canActivate: [AuthGuard]},
   {path: 'pagina-nao-encontrada', component: PaginaNaoEncontradaComponent, canActivate: [AuthGuard]},

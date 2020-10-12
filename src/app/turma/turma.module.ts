@@ -1,7 +1,4 @@
 import {NgModule} from '@angular/core';
-import dayGridPlugin from '@fullcalendar/daygrid';
-import timeGridPlugin from '@fullcalendar/timegrid';
-import interactionPlugin from '@fullcalendar/interaction';
 import {CommonModule} from '@angular/common';
 import {CadastroTurmaComponent} from './cadastro-turma/cadastro-turma.component';
 import {CheckboxModule} from 'primeng/checkbox';
@@ -11,17 +8,21 @@ import {SharedModule} from '../shared/shared.module';
 import {HttpClientModule} from '@angular/common/http';
 import {RouterModule} from '@angular/router';
 import {TooltipModule} from 'primeng/tooltip';
-import { ListaTurmaComponent } from './lista-turma/lista-turma.component';
+import {ListaTurmaComponent} from './lista-turma/lista-turma.component';
 import {DropdownModule} from 'primeng/dropdown';
 import {ButtonModule} from 'primeng/button';
 import {TableModule} from 'primeng/table';
 import {ListboxModule} from 'primeng/listbox';
 import {PickListModule} from 'primeng/picklist';
-import { CalendarioComponent } from './calendario/calendario.component';
+import {CalendarioComponent} from './calendario/calendario.component';
 import {FullCalendarModule} from 'primeng/fullcalendar';
+import {AulaComponent} from './aula/aula.component';
+import {DynamicDialogModule} from "primeng/dynamicdialog";
+import {DialogModule} from "primeng/dialog";
+import {CalendarModule} from 'primeng/calendar';
 
 @NgModule({
-  declarations: [CadastroTurmaComponent, ListaTurmaComponent, CalendarioComponent],
+  declarations: [CadastroTurmaComponent, ListaTurmaComponent, CalendarioComponent, AulaComponent],
   imports: [
     CommonModule,
     CheckboxModule,
@@ -36,8 +37,12 @@ import {FullCalendarModule} from 'primeng/fullcalendar';
     DropdownModule,
     ListboxModule,
     PickListModule,
-    FullCalendarModule
-  ]
+    FullCalendarModule,
+    DynamicDialogModule,
+    DialogModule,
+    CalendarModule
+  ],
+  providers: [DynamicDialogModule]
 })
 export class TurmaModule {
 }
