@@ -29,3 +29,12 @@ input {
     margin-top: 10px;
   }
 }
+
+a.voltarPesquisa:link {
+  text-decoration:none;
+}
+
+a.voltarPesquisa:visited {
+  text-decoration:none;
+  color: #404C51;
+}
