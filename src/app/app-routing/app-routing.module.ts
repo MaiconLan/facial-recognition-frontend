@@ -10,10 +10,12 @@ import {LoginFormComponent} from '../seguranca/login-form/login-form.component';
 import {AuthGuard} from '../seguranca/auth.guard';
 import {CadastroTurmaComponent} from '../turma/cadastro-turma/cadastro-turma.component';
 import {ListaTurmaComponent} from '../turma/lista-turma/lista-turma.component';
+import {DashboardComponent} from '../dashboard/dashboard.component';
 
 const routes: Routes = [
   {path: '', redirectTo: 'login', pathMatch: 'full'},
   {path: 'login', component: LoginFormComponent},
+  {path: 'dashboard', component: DashboardComponent},
   {path: 'aluno', component: ListaAlunoComponent, canActivate: [AuthGuard]},
   {path: 'aluno/novo', component: CadastroAlunoComponent, canActivate: [AuthGuard]},
   {path: 'aluno/:id', component: CadastroAlunoComponent, canActivate: [AuthGuard]},
