@@ -1,8 +1,9 @@
 .title {
   margin-top: 12px;
-  text-align: center;
   font-weight: bold;
   color: white;
+  text-decoration: none;
+  text-align:center;
 }
 
 .icon-menu {
