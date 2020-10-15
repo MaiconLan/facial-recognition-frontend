@@ -19,6 +19,7 @@ import {FullCalendarModule} from 'primeng/fullcalendar';
 import {DynamicDialogModule} from "primeng/dynamicdialog";
 import {DialogModule} from "primeng/dialog";
 import {CalendarModule} from 'primeng/calendar';
+import {InputNumber, InputNumberModule} from "primeng/inputnumber";
 
 @NgModule({
   declarations: [CadastroTurmaComponent, ListaTurmaComponent, CalendarioComponent],
@@ -39,7 +40,8 @@ import {CalendarModule} from 'primeng/calendar';
     FullCalendarModule,
     DynamicDialogModule,
     DialogModule,
-    CalendarModule
+    CalendarModule,
+    InputNumberModule
   ],
   providers: [DynamicDialogModule]
 })

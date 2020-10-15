@@ -73,7 +73,7 @@ export class ListaTurmaComponent implements OnInit {
     this.confirmation.confirm({
       icon: 'pi pi-info-circle',
       header: 'Confirmar exclusão!',
-      message: 'Você tem certeza de que deseja excluir?',
+      message: 'Você tem certeza de que deseja excluir? Todas as aulas cadastradas serão perdidas.',
       accept: () => {
         this.excluir(turma);
       },

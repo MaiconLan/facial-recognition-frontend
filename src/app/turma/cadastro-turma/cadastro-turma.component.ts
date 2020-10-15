@@ -63,8 +63,9 @@ export class CadastroTurmaComponent implements OnInit {
 
   criar(): void {
     this.turmaService.criar(this.turma)
-      .then(() => {
+      .then(response => {
         this.addSuccess('Criado', 'Registro criado com sucesso');
+        this.router.navigate(['turma', response.idTurma]);
       }).catch(error => this.handler.handle(error));
   }
 
