@@ -14,16 +14,16 @@ export class DashboardComponent {
       // mobile
       if (matches) {
         return [
-          {title: 'Alunos sem Foto', cols: 1, rows: 1, style: {'background-color': '#CB4335', 'color': 'white'}, numero: '9'},
-          {title: 'Alunos cadastrados', cols: 1, rows: 1, style: {'background-color': '#229954', 'color': 'white'}, numero: '10' },
+          {title: 'Alunos sem Foto', cols: 1, rows: 1, style: {'background-color': '#CB4335', 'color': 'white'}, numero: '9', link: "/aluno"},
+          {title: 'Alunos cadastrados', cols: 1, rows: 1, style: {'background-color': '#229954', 'color': 'white'}, numero: '10', link: "/professor" },
           {title: 'Profs. cadastrados', cols: 1, rows: 1, style: {'background-color': '#7D3C98', 'color': '#fff'}, numero: '11'},
           {title: 'Aulas do dia', cols: 1, rows: 1, style: {'background-color': '#2E4053', 'color': '#fff'}, numero: '12'}
         ];
       }
 
       return [
-        {title: 'Alunos sem Foto', cols: 2, rows: 1, style: {'background-color': '#CB4335', 'color': '#fff'}, numero: '9'},
-        {title: 'Alunos cadastrados', cols: 1, rows: 1, style: {'background-color': '#229954', 'color': 'white'}, numero: '10'  },
+        {title: 'Alunos sem Foto', cols: 2, rows: 1, style: {'background-color': '#CB4335', 'color': '#fff'}, numero: '9',  link: "/aluno"},
+        {title: 'Alunos cadastrados', cols: 1, rows: 1, style: {'background-color': '#229954', 'color': 'white'}, numero: '10', link: "/professor"},
         {title: 'Profs. cadastrados', cols: 2, rows: 1, style: {'background-color': '#7D3C98', 'color': '#fff'}, numero: '11'},
         {title: 'Aulas do dia', cols: 1, rows: 1, style: {'background-color': '#2E4053', 'color': '#fff'}, numero: '12'}
       ];
