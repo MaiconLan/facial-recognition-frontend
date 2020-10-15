@@ -1,3 +1,4 @@
+import {DatePipe, Time} from "@angular/common";
 
 export class Aluno {
   idAluno: number;
@@ -28,4 +29,16 @@ export class Turma {
   finalizada: boolean;
   professor: Professor;
   alunos: Aluno[] = [];
+}
+
+export class Aula {
+  id: number;
+  title: string;
+  date: string;
+  start: string;
+  end: string;
+
+  constructor() {
+  }
+
 }

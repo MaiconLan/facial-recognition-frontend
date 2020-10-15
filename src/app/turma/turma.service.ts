@@ -19,7 +19,6 @@ export class TurmaFiltro {
 })
 export class TurmaService {
 
-
   url: string;
 
   constructor(private http: FacialHttp) {
