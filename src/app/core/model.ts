@@ -1,3 +1,5 @@
+import {DatePipe, Time} from "@angular/common";
+
 export class Aluno {
   idAluno: number;
   nome: string;
@@ -32,7 +34,11 @@ export class Turma {
 export class Aula {
   id: number;
   title: string;
-  start: Date;
-  end: Date;
-  turma: Turma;
+  date: string;
+  start: string;
+  end: string;
+
+  constructor() {
+  }
+
 }

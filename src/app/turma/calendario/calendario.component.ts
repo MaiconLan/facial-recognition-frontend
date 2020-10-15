@@ -26,11 +26,18 @@ export class CalendarioComponent implements OnInit {
 
   aula = new Aula();
 
+  date: Date;
+
+  start: Date;
+
+  end: Date;
+
   turma: Turma;
 
   @ViewChild('fc') fc: FullCalendar;
 
   idTurma: number;
+  pt: any;
 
   constructor(private calendarioService: CalendarioService,
               private turmaService: TurmaService,
@@ -51,18 +58,49 @@ export class CalendarioComponent implements OnInit {
     this.turmaService.buscar(this.idTurma)
       .then(response => {
         this.turma = response;
-        console.log(this.turma);
       });
   }
 
   listarAulas(): void {
     this.calendarioService.getAulas(this.idTurma)
       .then(response => {
-        this.events = response;
+        const eventos = [];
+
+        for (const r of response) {
+          const evento = {
+            id: r.id,
+            title: r.title,
+            start: this.toDate(r.date, r.start),
+            end: this.toDate(r.date, r.end),
+          };
+          eventos.push(evento);
+        }
+
+        this.events = eventos;
       });
   }
 
+  toDate(date, time): Date {
+    const dateString = date + 'T' + time;
+    return new Date(dateString);
+  }
+
   configure(): void {
+    this.pt = {
+      firstDayOfWeek: 0,
+      dayNames: ['Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sábado'],
+      dayNamesShort: ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sab'],
+      dayNamesMin: ['Do', 'Se', 'Te', 'Qua', 'Qui', 'Se', 'Sa'],
+      monthNames: ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'],
+      monthNamesShort: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'],
+      today: 'Hoje',
+      clear: 'Limpar',
+      dateFormat: 'mm/dd/yy',
+      weekHeader: 'Sem',
+      timezone: 'America/Sao_Paulo',
+      locale: 'pt'
+    };
+
     this.options = {
       plugins: [dayGridPlugin, timeGridPlugin, interactionPlugin],
       initialView: 'dayGridMonth',
@@ -73,38 +111,34 @@ export class CalendarioComponent implements OnInit {
       },
       color: 'yellow',   // an option!
       textColor: 'black', // an option!
+      timezone: 'UTC',
+      locale: 'pt',
       dateClick: (e) => {
         this.criarEvento(e);
       },
       eventClick: (e) => {
         this.editarEvento(e);
-      }
+      },
     };
   }
 
-  gotoDate(date: Date): void {
-    this.fc.getCalendar().gotoDate(date);
-
-  }
-
   private criarEvento(event): void {
-    console.log(event);
     this.aula = new Aula();
-    this.aula.start = event.date;
-    this.aula.end = event.date;
+    this.date = event.date;
+    this.start = event.date;
+    this.end = event.date;
     this.mostrarAula = true;
   }
 
   private editarEvento(e): void {
-    const event = this.fc.getCalendar().getEventById(e.event.id);
-    const aulaEdit = new Aula();
-    aulaEdit.id = event.id;
-    aulaEdit.start = event.start;
-    aulaEdit.end = event.end;
-    aulaEdit.title = event.title;
-    aulaEdit.turma = this.turma;
+    const event = this.fc.calendar.getEventById(e.event.id);
+    this.aula = new Aula();
+    this.aula.id = event.id;
+    this.aula.title = event.title;
+    this.date = event.start;
+    this.start = event.start;
+    this.end = event.end;
 
-    this.aula = aulaEdit;
     this.mostrarAula = true;
   }
 
@@ -121,6 +155,16 @@ export class CalendarioComponent implements OnInit {
   }
 
   private criarAula(): void {
+    const month = this.date.getUTCMonth() + 1;
+    const day = this.date.getUTCDate();
+    const year = this.date.getUTCFullYear();
+    this.aula.date = year + '-' + (month < 10 ? '0' + month : month) + '-' + (day < 10 ? '0' + day : day);
+
+    this.aula.start = this.start.toLocaleTimeString();
+    this.aula.end = this.end.toLocaleTimeString();
+
+    console.log('Aula String: ', JSON.stringify(this.aula));
+
     this.calendarioService.criarAula(this.idTurma, this.aula)
       .then(() => {
         this.addSuccess('Aula criada', 'Aula criada com sucesso');
@@ -132,10 +176,18 @@ export class CalendarioComponent implements OnInit {
   }
 
   private editarAula(): void {
+    const month = this.date.getUTCMonth() + 1;
+    const day = this.date.getUTCDate();
+    const year = this.date.getUTCFullYear();
+    this.aula.date = year + '-' + (month < 10 ? '0' + month : month) + '-' + (day < 10 ? '0' + day : day);
+
+    this.aula.start = this.start.toLocaleTimeString();
+    this.aula.end = this.end.toLocaleTimeString();
+
+    console.log('Aula String: ', JSON.stringify(this.aula));
     this.calendarioService.editarAula(this.aula)
-      .then(response => {
-        console.log(response);
-        this.events.push(response);
+      .then(() => {
+        this.listarAulas();
         this.mostrarAula = false;
         this.aula = new Aula();
         this.addSuccess('Aula Editada', 'Aula editada com sucesso');
@@ -154,7 +206,7 @@ export class CalendarioComponent implements OnInit {
       .catch(error => this.handler.handle(error));
   }
 
-  private editando(): boolean {
+  editando(): boolean {
     return Boolean(this.aula && this.aula.id);
   }
 

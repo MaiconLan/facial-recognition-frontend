@@ -16,13 +16,12 @@ import {ListboxModule} from 'primeng/listbox';
 import {PickListModule} from 'primeng/picklist';
 import {CalendarioComponent} from './calendario/calendario.component';
 import {FullCalendarModule} from 'primeng/fullcalendar';
-import {AulaComponent} from './aula/aula.component';
 import {DynamicDialogModule} from "primeng/dynamicdialog";
 import {DialogModule} from "primeng/dialog";
 import {CalendarModule} from 'primeng/calendar';
 
 @NgModule({
-  declarations: [CadastroTurmaComponent, ListaTurmaComponent, CalendarioComponent, AulaComponent],
+  declarations: [CadastroTurmaComponent, ListaTurmaComponent, CalendarioComponent],
   imports: [
     CommonModule,
     CheckboxModule,
