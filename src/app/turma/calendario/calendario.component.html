@@ -12,45 +12,49 @@
 <p-dialog header="Agendar aula" [(visible)]="mostrarAula" [modal]="true" [resizable]="false"
           [contentStyle]="{'overflow': 'visible'}"
           [closeOnEscape]="true" [draggable]="false">
-  <p-header>
-    {{turma?.materia}}/{{turma?.ano}} - {{turma?.professor.nome}}
-  </p-header>
+    <p-header>
+      {{turma?.materia}}/{{turma?.ano}} - {{turma?.professor.nome}}
+    </p-header>
+  <form #f="ngForm" (ngSubmit)="salvarAula()">
 
-  <div class="container">
-    <div class="p-grid">
-      <div class="p-col-12 p-md-12 p-lg-12">
-        <label style="display: block">Título:</label>
-        <input pInputText type="text" name="nome" [(ngModel)]="aula.title"/>
-      </div>
+    <div class="container">
+      <div class="p-grid">
+        <div class="p-col-12 p-md-12 p-lg-12">
+          <label style="display: block">Título:</label>
+          <input pInputText type="text" name="titulo" [(ngModel)]="aula.title" required/>
+        </div>
 
-      <div class="p-col-12 p-md-4 p-lg-4">
-        <label style="display: block">Data:</label>
-        <p-calendar [(ngModel)]="date" [style]="{'width': '100%'}"
-                    disabled="true"
-                    showIcon="true" dateFormat="dd/mm/yy" [locale]="pt"></p-calendar>
-      </div>
+        <div class="p-col-12 p-md-4 p-lg-4">
+          <label style="display: block">Data:</label>
+          <p-calendar [(ngModel)]="date" [style]="{'width': '100%'}"
+                      disabled="true"
+                      name="date"
+                      showIcon="true" dateFormat="dd/mm/yy" [locale]="pt"></p-calendar>
+        </div>
 
-      <div class="p-col-12 p-md-4 p-lg-4">
-        <label style="display: block">Início:</label>
-        <p-calendar [(ngModel)]="start" [style]="{'width': '100%'}"
-                    showIcon="true" timeOnly="true" [showTime]="true"
-                    hourFormat="24" ></p-calendar>
-      </div>
+        <div class="p-col-12 p-md-4 p-lg-4">
+          <label style="display: block">Início:</label>
+          <p-calendar [(ngModel)]="start" [style]="{'width': '100%'}"
+                      showIcon="true" timeOnly="true" [showTime]="true"
+                      name="start" required
+                      hourFormat="24"></p-calendar>
+        </div>
 
-      <div class="p-col-12 p-md-4 p-lg-4">
-        <label style="display: block">Término:</label>
-        <p-calendar [(ngModel)]="end" [style]="{'width': '100%'}"
-                    showIcon="true" timeOnly="true" [showTime]="true"
-                    hourFormat="24"></p-calendar>
+        <div class="p-col-12 p-md-4 p-lg-4">
+          <label style="display: block">Término:</label>
+          <p-calendar [(ngModel)]="end" [style]="{'width': '100%'}"
+                      showIcon="true" timeOnly="true" [showTime]="true"
+                      name="end" required
+                      hourFormat="24"></p-calendar>
+        </div>
       </div>
     </div>
-  </div>
-
-  <p-footer>
-    <button pButton icon="pi pi-save" type="submit" class="p-button-success" label="Salvar"
-            (click)="salvarAula()"></button>
-    <button pButton icon="pi pi-times" type="submit" class="p-button-danger" label="Excluir"
-            (click)="excluirAula()" *ngIf="editando()"></button>
-  </p-footer>
+    <p-footer>
+      <button pButton icon="pi pi-save" type="submit" class="p-button-success" label="Salvar"
+              [disabled]="f.invalid"></button>
+      <button pButton icon="pi pi-times" type="button" class="p-button-danger" label="Excluir"
+              (click)="excluirAula()" *ngIf="editando()"></button>
+    </p-footer>
+  </form>
 
 </p-dialog>
