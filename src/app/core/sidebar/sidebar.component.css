@@ -1,7 +1,9 @@
 .title {
-  text-align: center;
+  margin-top: 12px;
   font-weight: bold;
   color: white;
+  text-decoration: none;
+  text-align:center;
 }
 
 .icon-menu {

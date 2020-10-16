@@ -23,35 +23,51 @@ import {LoadingBarHttpClientModule} from "@ngx-loading-bar/http-client";
 import {LoadingBarRouterModule} from "@ngx-loading-bar/router";
 import {LOADING_BAR_CONFIG, LoadingBarModule} from "@ngx-loading-bar/core";
 import {TurmaModule} from './turma/turma.module';
+import { DashboardComponent } from './dashboard/dashboard.component';
+import { MatGridListModule } from '@angular/material/grid-list';
+import { MatCardModule } from '@angular/material/card';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatIconModule } from '@angular/material/icon';
+import { MatButtonModule } from '@angular/material/button';
+import { LayoutModule } from '@angular/cdk/layout';
+import {DialogModule} from 'primeng/dialog';
 
 @NgModule({
   declarations: [
     AppComponent,
     NaoAutorizadoComponent,
+    DashboardComponent,
   ],
-  imports: [
-    BrowserModule,
-    MessageModule,
-    ButtonModule,
-    TableModule,
-    BrowserModule,
-    BrowserAnimationsModule,
-    TooltipModule,
-    InputTextModule,
-    PasswordModule,
-    SelectButtonModule,
-    AlunoModule,
-    CoreModule,
-    ProfessorModule,
-    ConfirmDialogModule,
-    ToastModule,
-    MessageModule,
-    AppRoutingModule,
-    SegurancaModule,
-    LoadingBarHttpClientModule,
-    LoadingBarRouterModule,
-    LoadingBarModule,
-  ],
+    imports: [
+        BrowserModule,
+        MessageModule,
+        ButtonModule,
+        TableModule,
+        BrowserModule,
+        BrowserAnimationsModule,
+        TooltipModule,
+        InputTextModule,
+        PasswordModule,
+        SelectButtonModule,
+        AlunoModule,
+        CoreModule,
+        ProfessorModule,
+        ConfirmDialogModule,
+        ToastModule,
+        MessageModule,
+        AppRoutingModule,
+        SegurancaModule,
+        LoadingBarHttpClientModule,
+        LoadingBarRouterModule,
+        LoadingBarModule,
+        MatGridListModule,
+        MatCardModule,
+        MatMenuModule,
+        MatIconModule,
+        MatButtonModule,
+        LayoutModule,
+        DialogModule,
+    ],
   providers: [
     MessageService,
     ConfirmationService,
