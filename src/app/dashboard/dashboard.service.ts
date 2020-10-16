@@ -9,6 +9,7 @@ export class DashboardService {
 
   urlAluno = environment.apiUrl + '/aluno/dashboard';
   urlProfessor = environment.apiUrl + '/professor/dashboard';
+  urlAulas = environment.apiUrl + '/turma/dashboard';
 
   constructor(private http: HttpClient) { }
 
@@ -29,6 +30,18 @@ export class DashboardService {
       .append('Content-Type', 'application/json');
 
     return this.http.get<any>(`${this.urlProfessor}`, {headers})
+      .toPromise()
+      .then()
+      .catch(error => {
+        return Promise.reject(error);
+      });
+  }
+
+  getAulasDashboard(): Promise<any> {
+    const headers = new HttpHeaders()
+      .append('Content-Type', 'application/json');
+
+    return this.http.get<any>(`${this.urlAulas}`, {headers})
       .toPromise()
       .then()
       .catch(error => {

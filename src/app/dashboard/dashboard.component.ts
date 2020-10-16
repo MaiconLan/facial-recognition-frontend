@@ -153,5 +153,23 @@ export class DashboardComponent implements OnInit {
           });
       }
     }
+
+    for (const card of this.cardsPc) {
+      if (card.id === 4) {
+        this.dashboardService.getAulasDashboard()
+          .then(response => {
+            card.numero = response.aulasDoDia;
+          });
+      }
+    }
+
+    for (const card of this.cardsMobile) {
+      if (card.id === 4) {
+        this.dashboardService.getAulasDashboard()
+          .then(response => {
+            card.numero = response.aulasDoDia;
+          });
+      }
+    }
   }
 }
