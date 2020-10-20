@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {map} from 'rxjs/operators';
-import {Breakpoints, BreakpointObserver} from '@angular/cdk/layout';
+import {BreakpointObserver, Breakpoints} from '@angular/cdk/layout';
 import {DashboardService} from './dashboard.service';
 import {Title} from '@angular/platform-browser';
 
@@ -134,43 +134,22 @@ export class DashboardComponent implements OnInit {
     this.title.setTitle('Dashboard');
 
     for (const card of this.cardsPc) {
-      if (card.id === 2) {
+      if (card.id === 1) {
+        this.dashboardService.getAlunoDashboard()
+          .then(response => {
+            card.numero = response.alunosSemFotos;
+          });
+      } else if (card.id === 2) {
         this.dashboardService.getAlunoDashboard()
           .then(response => {
             card.numero = response.alunosCadastrados;
           });
-      }
-    }
-
-    for (const card of this.cardsMobile) {
-      if (card.id === 2) {
-        this.dashboardService.getAlunoDashboard()
-          .then(response => {
-            card.numero = response.alunosCadastrados;
-          });
-      }
-    }
-
-    for (const card of this.cardsPc) {
-      if (card.id === 3) {
+      } else if (card.id === 3) {
         this.dashboardService.getProfessorDashboard()
           .then(response => {
             card.numero = response.professoresCadastrados;
           });
-      }
-    }
-
-    for (const card of this.cardsMobile) {
-      if (card.id === 3) {
-        this.dashboardService.getProfessorDashboard()
-          .then(response => {
-            card.numero = response.professoresCadastrados;
-          });
-      }
-    }
-
-    for (const card of this.cardsPc) {
-      if (card.id === 4) {
+      } else if (card.id === 4) {
         this.dashboardService.getAulasDashboard()
           .then(response => {
             card.numero = response.aulasDoDia;
@@ -179,7 +158,22 @@ export class DashboardComponent implements OnInit {
     }
 
     for (const card of this.cardsMobile) {
-      if (card.id === 4) {
+      if (card.id === 1) {
+        this.dashboardService.getAlunoDashboard()
+          .then(response => {
+            card.numero = response.alunosSemFotos;
+          });
+      } else if (card.id === 2) {
+        this.dashboardService.getAlunoDashboard()
+          .then(response => {
+            card.numero = response.alunosCadastrados;
+          });
+      } else if (card.id === 3) {
+        this.dashboardService.getProfessorDashboard()
+          .then(response => {
+            card.numero = response.professoresCadastrados;
+          });
+      } else if (card.id === 4) {
         this.dashboardService.getAulasDashboard()
           .then(response => {
             card.numero = response.aulasDoDia;

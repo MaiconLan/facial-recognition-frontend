@@ -114,4 +114,48 @@ export class AlunoService {
         return Promise.reject(error);
       });
   }
+
+  urlUploadFoto(aluno: Aluno): string {
+    return `${this.url}/${aluno.idAluno}/foto`;
+  }
+
+
+  enviarFoto(aluno: Aluno, foto: any): Promise<void> {
+    const headers = new HttpHeaders();
+
+    const formData: FormData = new FormData();
+    formData.append('foto', foto, foto.name);
+
+    return this.http.post<any>(`${this.url}/${aluno.idAluno}/foto`, formData, {
+      headers,
+      reportProgress: true,
+      responseType: 'json'
+    })
+      .toPromise()
+      .then()
+      .catch(error => {
+        return Promise.reject(error);
+      });
+  }
+
+  getFotos(aluno: Aluno): Promise<any> {
+    const headers = new HttpHeaders()
+      .append('Content-Type', 'application/json');
+
+    return this.http.get<any>(`${this.url}/${aluno.idAluno}/foto`, {headers})
+      .toPromise()
+      .then()
+      .catch(error => {
+        return Promise.reject(error);
+      });
+  }
+
+  excluirFoto(id: any): Promise<any> {
+    return this.http.delete(`${this.url}/foto/${id}`)
+      .toPromise()
+      .then(() => null)
+      .catch(error => {
+        return Promise.reject(error);
+      });
+  }
 }
