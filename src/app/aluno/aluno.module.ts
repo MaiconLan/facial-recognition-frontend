@@ -14,6 +14,9 @@ import {ConfirmationService, MessageService} from 'primeng/api';
 import {ConfirmDialogModule} from 'primeng/confirmdialog';
 import {RouterModule} from '@angular/router';
 import {TooltipModule} from 'primeng/tooltip';
+import {TabViewModule} from 'primeng/tabview';
+import {FileUploadModule} from 'primeng/fileupload';
+import {DialogModule} from "primeng/dialog";
 
 
 @NgModule({
@@ -31,10 +34,12 @@ import {TooltipModule} from 'primeng/tooltip';
     PasswordModule,
     SharedModule,
     HttpClientModule,
-
     ConfirmDialogModule,
     RouterModule,
     TooltipModule,
+    TabViewModule,
+    FileUploadModule,
+    DialogModule
   ],
   exports: [],
   providers: [MessageService, ConfirmationService]
