@@ -21,6 +21,10 @@
       </div>
 
       <div class="navbar-menuitem" routerLinkActive="ativo">
+        <a routerLink="/dashboard" *ngIf="mostrarBotaoMenu()" (click)="exibindoMenu = !exibindoMenu">Dashboard</a>
+      </div>
+
+      <div class="navbar-menuitem" routerLinkActive="ativo">
         <a routerLink="/aluno" *ngIf="mostrarBotaoMenu()" (click)="exibindoMenu = !exibindoMenu">Alunos</a>
       </div>
 

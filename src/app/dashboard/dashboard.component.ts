@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {map} from 'rxjs/operators';
 import {Breakpoints, BreakpointObserver} from '@angular/cdk/layout';
 import {DashboardService} from './dashboard.service';
-
+import {Title} from '@angular/platform-browser';
 
 @Component({
   selector: 'app-dashboard',
@@ -19,7 +19,7 @@ export class DashboardComponent implements OnInit {
       cols: 2,
       rows: 1,
       mostrarModal: false,
-      style: {'background-color': '#CB4335', 'color': '#fff'},
+      style: {'background-color': '#CB4335', color: '#fff'},
       numero: '0',
       link: '/aluno'
     },
@@ -29,7 +29,7 @@ export class DashboardComponent implements OnInit {
       cols: 1,
       rows: 1,
       mostrarModal: false,
-      style: {'background-color': '#229954', 'color': 'white'},
+      style: {'background-color': '#229954', color: 'white'},
       numero: '0',
       link: '/professor'
     },
@@ -39,7 +39,7 @@ export class DashboardComponent implements OnInit {
       cols: 2,
       rows: 1,
       mostrarModal: false,
-      style: {'background-color': '#7D3C98', 'color': '#fff'},
+      style: {'background-color': '#7D3C98', color: '#fff'},
       numero: '0'
     },
     {
@@ -48,7 +48,7 @@ export class DashboardComponent implements OnInit {
       cols: 1,
       rows: 1,
       mostrarModal: false,
-      style: {'background-color': '#2E4053', 'color': '#fff'},
+      style: {'background-color': '#2E4053', color: '#fff'},
       numero: '0'
     }
   ];
@@ -60,7 +60,7 @@ export class DashboardComponent implements OnInit {
       cols: 1,
       rows: 1,
       mostrarModal: false,
-      style: {'background-color': '#CB4335', 'color': 'white'},
+      style: {'background-color': '#CB4335', color: 'white'},
       numero: '0',
       link: '/aluno'
     },
@@ -70,7 +70,7 @@ export class DashboardComponent implements OnInit {
       cols: 1,
       rows: 1,
       mostrarModal: false,
-      style: {'background-color': '#229954', 'color': 'white'},
+      style: {'background-color': '#229954', color: 'white'},
       numero: '0',
       link: '/professor'
     },
@@ -80,7 +80,7 @@ export class DashboardComponent implements OnInit {
       cols: 1,
       rows: 1,
       mostrarModal: false,
-      style: {'background-color': '#7D3C98', 'color': '#fff'},
+      style: {'background-color': '#7D3C98', color: '#fff'},
       numero: '0'
     },
     {
@@ -89,7 +89,7 @@ export class DashboardComponent implements OnInit {
       cols: 1,
       rows: 1,
       mostrarModal: false,
-      style: {'background-color': '#2E4053', 'color': '#fff'},
+      style: {'background-color': '#2E4053', color: '#fff'},
       numero: '0'
     }
   ];
@@ -106,11 +106,24 @@ export class DashboardComponent implements OnInit {
   );
 
   constructor(private breakpointObserver: BreakpointObserver,
-              private dashboardService: DashboardService) {
+              private dashboardService: DashboardService,
+              private title: Title) {
   }
 
   abrirModalDashboard(card: any): void {
     card.mostrarModal = true;
+    if (card.id === 1){
+      console.log('ola');
+    }
+    if (card.id === 2){
+      console.log('ola2');
+    }
+    if (card.id === 3){
+      console.log('ola3');
+    }
+    if (card.id === 4){
+      console.log('ola4');
+    }
   }
 
   fecharModalDashboard(card: any): void {
@@ -118,6 +131,8 @@ export class DashboardComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.title.setTitle('Dashboard');
+
     for (const card of this.cardsPc) {
       if (card.id === 2) {
         this.dashboardService.getAlunoDashboard()

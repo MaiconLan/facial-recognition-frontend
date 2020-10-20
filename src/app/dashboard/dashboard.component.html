@@ -13,10 +13,11 @@
           <br>
           <div class="numerosDashboard">{{card.numero}}</div>
         </mat-card-content>
-        <p-dialog header="{{card.title}}"  [modal]="true" [resizable]="false"
-                  [(visible)]="card.mostrarModal"
+        <p-dialog header="{{card.title}}" [(visible)]="card.mostrarModal" [modal]="true" [resizable]="false"
+                  [contentStyle]="{'overflow': 'visible'}"
                   [closeOnEscape]="true" [draggable]="false"
                   (onHide)="fecharModalDashboard(card)">
+          <p-button (click)="salvar()">Gerar CSV {{card.id}}</p-button>
         </p-dialog>
       </mat-card>
       </a>
