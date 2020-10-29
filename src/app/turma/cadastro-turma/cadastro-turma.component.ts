@@ -64,7 +64,7 @@ export class CadastroTurmaComponent implements OnInit {
   criar(): void {
     this.turmaService.criar(this.turma)
       .then(response => {
-        this.addSuccess('Criado', 'Registro criado com sucesso');
+        this.handler.addSuccess('Criado', 'Registro criado com sucesso');
         this.router.navigate(['turma', response.idTurma]);
       }).catch(error => this.handler.handle(error));
   }
@@ -73,7 +73,7 @@ export class CadastroTurmaComponent implements OnInit {
     console.log(this.turma);
     this.turmaService.atualizar(this.turma)
       .then(() => {
-        this.addSuccess('Atualizado', 'Registro atualizado com sucesso');
+        this.handler.addSuccess('Atualizado', 'Registro atualizado com sucesso');
       }).catch(error => this.handler.handle(error));
   }
 
@@ -94,10 +94,6 @@ export class CadastroTurmaComponent implements OnInit {
     this.carregarDropdownProfessores();
     f.reset();
     this.router.navigate(['turma/novo']);
-  }
-
-  addSuccess(title: string, message: string): void {
-    this.messageService.add({severity: 'success', summary: title, detail: message, life: 3000});
   }
 
   private carregarDropdownProfessores(): void {

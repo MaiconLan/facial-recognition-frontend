@@ -19,10 +19,11 @@ import {FullCalendarModule} from 'primeng/fullcalendar';
 import {DynamicDialogModule} from "primeng/dynamicdialog";
 import {DialogModule} from "primeng/dialog";
 import {CalendarModule} from 'primeng/calendar';
-import {InputNumber, InputNumberModule} from "primeng/inputnumber";
+import {InputNumberModule} from "primeng/inputnumber";
+import {AulaComponent} from './aula/aula.component';
 
 @NgModule({
-  declarations: [CadastroTurmaComponent, ListaTurmaComponent, CalendarioComponent],
+  declarations: [CadastroTurmaComponent, ListaTurmaComponent, CalendarioComponent, AulaComponent],
   imports: [
     CommonModule,
     CheckboxModule,

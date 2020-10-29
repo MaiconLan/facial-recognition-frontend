@@ -54,6 +54,9 @@
               [disabled]="f.invalid"></button>
       <button pButton icon="pi pi-times" type="button" class="p-button-danger" label="Excluir"
               (click)="excluirAula()" *ngIf="editando()"></button>
+      <button pButton icon="pi pi-user" type="button" class="p-button-help" label="Presenças"
+              style="float: right"
+              (click)="acessarPresencas()" *ngIf="editando()"></button>
     </p-footer>
   </form>
 

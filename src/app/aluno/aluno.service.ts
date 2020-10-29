@@ -115,11 +115,6 @@ export class AlunoService {
       });
   }
 
-  urlUploadFoto(aluno: Aluno): string {
-    return `${this.url}/${aluno.idAluno}/foto`;
-  }
-
-
   enviarFoto(aluno: Aluno, foto: any): Promise<void> {
     const headers = new HttpHeaders();
 
