@@ -102,13 +102,14 @@ export class CadastroAlunoComponent implements OnInit {
 
   enviarFoto(event: any, form: NgForm): void {
     if (event.files.length > 0) {
-      const file = event.files[0];
-      this.alunoService.enviarFoto(this.aluno, file)
-        .then(() => {
-          this.getFotos();
-          this.handler.addSuccess('Sucesso', 'Foto enviada');
-          form.reset();
-        }).catch(error => this.handler.handle(error));
+      for (const file of event.files) {
+        this.alunoService.enviarFoto(this.aluno, file)
+          .then(() => {
+            this.getFotos();
+            this.handler.addSuccess('Sucesso', 'Foto enviada');
+            form.reset();
+          }).catch(error => this.handler.handle(error));
+      }
     }
   }
 

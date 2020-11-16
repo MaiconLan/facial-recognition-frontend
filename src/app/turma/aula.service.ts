@@ -42,4 +42,16 @@ export class AulaService {
         return Promise.reject(error);
       });
   }
+
+  buscarNaoReconhecidos(aula: any): Promise<any> {
+    const headers = new HttpHeaders()
+      .append('Content-Type', 'application/json');
+
+    return this.http.get<any>(`${this.url}/${aula.id}/reconhecimento/nao-reconhecido`, {headers})
+      .toPromise()
+      .then()
+      .catch(error => {
+        return Promise.reject(error);
+      });
+  }
 }

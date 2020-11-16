@@ -4,6 +4,7 @@ import {ActivatedRoute} from "@angular/router";
 import {ErrorHandlerService} from "../../core/error-handler.service";
 import {AulaService} from "../aula.service";
 import {MessageService} from "primeng/api";
+import {AlunoService} from "../../aluno/aluno.service";
 
 @Component({
   selector: 'app-aula',
@@ -13,8 +14,13 @@ import {MessageService} from "primeng/api";
 export class AulaComponent implements OnInit {
 
   presencas = [];
+  rostosNaoReconhecidos = [];
 
   aula: any;
+
+  mostrarModalNaoReconhecidos = false;
+
+  alunos = [];
 
   constraints = {
     video: {
@@ -34,6 +40,7 @@ export class AulaComponent implements OnInit {
 
   constructor(private aulaService: AulaService,
               private messageService: MessageService,
+              private alunoService: AlunoService,
               private handler: ErrorHandlerService,
               private renderer: Renderer2,
               private title: Title,
@@ -45,6 +52,7 @@ export class AulaComponent implements OnInit {
 
     if (id) {
       this.buscar(id);
+      this.carregarDropdownAlunos();
     }
 
     this.startCamera();
@@ -55,6 +63,20 @@ export class AulaComponent implements OnInit {
       this.aula = response;
       this.title.setTitle('Aula');
     }).catch(error => this.handler.handle(error));
+  }
+
+  private carregarDropdownAlunos(): void {
+    this.alunoService.listar()
+      .then(response => {
+        if (response) {
+          this.alunos.push({label: 'Ninguém', value: null});
+          for (const aluno of response.content) {
+            this.alunos.push({label: aluno.nome, value: aluno});
+          }
+        } else {
+          this.alunos = [];
+        }
+      }).catch(error => this.handler.handle(error));
   }
 
   startCamera(): void {
@@ -78,15 +100,20 @@ export class AulaComponent implements OnInit {
 
   }
 
+  stopVideo(): void {
+    this.renderer.listen(this.videoElement.nativeElement, 'stop', () => {});
+  }
+
   async iniciarAula(): Promise<void> {
     this.handler.addSuccess('Sucesso', 'Aula iniciada');
     let i = 1;
-    while (i <= 15) {
+    while (i <= 5) {
       this.capture();
       this.handler.addSuccess('Sucesso', `Capturado ${i} vezes`);
       await this.delay(5000);
       i++;
     }
+    this.stopVideo();
   }
 
   capture(): void {
@@ -100,7 +127,7 @@ export class AulaComponent implements OnInit {
         .then(() => {
           this.buscar(this.aula.id);
         }).catch(error => {
-          this.handler.handle(error);
+        this.handler.handle(error);
       });
     });
   }
@@ -110,7 +137,22 @@ export class AulaComponent implements OnInit {
   }
 
   delay(ms: number): Promise<any> {
-    return new Promise( resolve => setTimeout(resolve, ms) );
+    return new Promise(resolve => setTimeout(resolve, ms));
   }
 
+  buscarNaoReconhecidos(): void {
+    this.aulaService.buscarNaoReconhecidos(this.aula).then(response => {
+      this.rostosNaoReconhecidos = response;
+      this.mostrarModalNaoReconhecidos = true;
+    }).catch(error => this.handler.handle(error));
+  }
+
+  salvarRostosReconhecidos(): void {
+    this.alunoService.salvarRostosReconhecidos(this.aula, this.rostosNaoReconhecidos)
+      .then(() => {
+        this.addSuccess('Sucesso', 'Imagens cadastradas com sucesso');
+        this.buscarNaoReconhecidos();
+        this.mostrarModalNaoReconhecidos = false;
+      }).catch(error => this.handler.handle(error));
+  }
 }

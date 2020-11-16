@@ -153,4 +153,20 @@ export class AlunoService {
         return Promise.reject(error);
       });
   }
+
+  salvarRostosReconhecidos(aula: any, fotos: any): Promise<void> {
+    const headers = new HttpHeaders()
+      .append('Content-Type', 'application/json');
+
+    console.log(fotos);
+
+    return this.http.post<any>(`${this.url}/aula/${aula.id}/foto`, JSON.stringify(fotos), {headers})
+      .toPromise()
+      .then(response => {
+        return response;
+      })
+      .catch(error => {
+        return Promise.reject(error);
+      });
+  }
 }
