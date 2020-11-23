@@ -48,10 +48,6 @@ export class CadastroAlunoComponent implements OnInit {
     }
   }
 
-  get urlUploadFoto(): string {
-    return this.alunoService.urlUploadFoto(this.aluno);
-  }
-
   editando(): boolean {
     return Boolean(this.aluno.idAluno);
   }
@@ -78,7 +74,7 @@ export class CadastroAlunoComponent implements OnInit {
 
   criar(): void {
     this.alunoService.criar(this.aluno).then(aluno => {
-      this.addSuccess('Criado', 'Registro criado com sucesso');
+      this.handler.addSuccess('Criado', 'Registro criado com sucesso');
       this.router.navigate(['/aluno', aluno.idAluno]);
     }).catch(error => {
       this.handler.handle(error);
@@ -87,15 +83,11 @@ export class CadastroAlunoComponent implements OnInit {
 
   atualizar(): void {
     this.alunoService.atualizar(this.aluno).then(response => {
-      this.addSuccess('Atualizado', 'Registro atualizado com sucesso');
+      this.handler.addSuccess('Atualizado', 'Registro atualizado com sucesso');
       this.aluno = response;
     }).catch(error => {
       this.handler.handle(error);
     });
-  }
-
-  addSuccess(title: string, message: string): void {
-    this.messageService.add({severity: 'success', summary: title, detail: message, life: 3000});
   }
 
   novo(form: NgForm): void {
@@ -109,15 +101,15 @@ export class CadastroAlunoComponent implements OnInit {
   }
 
   enviarFoto(event: any, form: NgForm): void {
-    console.log(event);
     if (event.files.length > 0) {
-      const file = event.files[0];
-      this.alunoService.enviarFoto(this.aluno, file)
-        .then(() => {
-          this.getFotos();
-          this.addSuccess('Sucesso', 'Foto enviada');
-          form.reset();
-        }).catch(error => this.handler.handle(error));
+      for (const file of event.files) {
+        this.alunoService.enviarFoto(this.aluno, file)
+          .then(() => {
+            this.getFotos();
+            this.handler.addSuccess('Sucesso', 'Foto enviada');
+            form.reset();
+          }).catch(error => this.handler.handle(error));
+      }
     }
   }
 
@@ -141,7 +133,7 @@ export class CadastroAlunoComponent implements OnInit {
       accept: () => {
         this.alunoService.excluirFoto(foto.idFoto).then(() => {
           this.getFotos();
-          this.addSuccess('Sucesso', 'Foto excluída com sucesso');
+          this.handler.addSuccess('Sucesso', 'Foto excluída com sucesso');
         }).catch(error => this.handler.handle(error));
       },
       acceptLabel: 'Sim',

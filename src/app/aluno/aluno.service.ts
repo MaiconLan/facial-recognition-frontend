@@ -115,11 +115,6 @@ export class AlunoService {
       });
   }
 
-  urlUploadFoto(aluno: Aluno): string {
-    return `${this.url}/${aluno.idAluno}/foto`;
-  }
-
-
   enviarFoto(aluno: Aluno, foto: any): Promise<void> {
     const headers = new HttpHeaders();
 
@@ -154,6 +149,22 @@ export class AlunoService {
     return this.http.delete(`${this.url}/foto/${id}`)
       .toPromise()
       .then(() => null)
+      .catch(error => {
+        return Promise.reject(error);
+      });
+  }
+
+  salvarRostosReconhecidos(aula: any, fotos: any): Promise<void> {
+    const headers = new HttpHeaders()
+      .append('Content-Type', 'application/json');
+
+    console.log(fotos);
+
+    return this.http.post<any>(`${this.url}/aula/${aula.id}/foto`, JSON.stringify(fotos), {headers})
+      .toPromise()
+      .then(response => {
+        return response;
+      })
       .catch(error => {
         return Promise.reject(error);
       });

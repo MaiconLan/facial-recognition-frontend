@@ -12,6 +12,7 @@ import {CadastroTurmaComponent} from '../turma/cadastro-turma/cadastro-turma.com
 import {ListaTurmaComponent} from '../turma/lista-turma/lista-turma.component';
 import {CalendarioComponent} from '../turma/calendario/calendario.component';
 import {DashboardComponent} from '../dashboard/dashboard.component';
+import {AulaComponent} from "../turma/aula/aula.component";
 
 const routes: Routes = [
   {path: '', redirectTo: 'login', pathMatch: 'full'},
@@ -27,6 +28,7 @@ const routes: Routes = [
   {path: 'turma/:id/calendario', component: CalendarioComponent, canActivate: [AuthGuard]},
   {path: 'turma/novo', component: CadastroTurmaComponent, canActivate: [AuthGuard]},
   {path: 'turma/:id', component: CadastroTurmaComponent, canActivate: [AuthGuard]},
+  {path: 'aula/:id', component: AulaComponent, canActivate: [AuthGuard]},
   {path: 'pagina-nao-encontrada', component: PaginaNaoEncontradaComponent, canActivate: [AuthGuard]},
   {path: '**', redirectTo: 'pagina-nao-encontrada'},
 ];

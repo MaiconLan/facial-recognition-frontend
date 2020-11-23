@@ -4,7 +4,7 @@ import interactionPlugin from '@fullcalendar/interaction';
 import timeGridPlugin from '@fullcalendar/timegrid';
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {Calendar} from '@fullcalendar/core';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {CalendarioService} from '../calendario.service';
 import {Aula, Turma} from "../../core/model";
 import {TurmaService} from "../turma.service";
@@ -43,6 +43,7 @@ export class CalendarioComponent implements OnInit {
               private turmaService: TurmaService,
               private handler: ErrorHandlerService,
               private messageService: MessageService,
+              private router: Router,
               private rout: ActivatedRoute) {
     const name = Calendar.name;
   }
@@ -212,6 +213,10 @@ export class CalendarioComponent implements OnInit {
 
   addSuccess(title: string, message: string): void {
     this.messageService.add({severity: 'success', summary: title, detail: message, life: 3000});
+  }
+
+  acessarPresencas(): void {
+    this.router.navigate(['/aula', this.aula.id]);
   }
 }
 

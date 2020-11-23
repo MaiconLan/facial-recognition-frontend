@@ -78,15 +78,11 @@ export class ListaAlunoComponent implements OnInit {
     this.loading = true;
     this.alunoService.excluir(aluno.idAluno).then(() => {
       this.consultar(this.filtro.pagina);
-      this.addSuccess('Sucesso', 'Registro excluído com sucesso');
+      this.handler.addSuccess('Sucesso', 'Registro excluído com sucesso');
     }).catch(error => {
       this.handler.handle(error);
     });
     this.loading = false;
-  }
-
-  addSuccess(title: string, message: string): void {
-    this.messageService.add({severity: 'success', summary: title, detail: message, life: 3000});
   }
 
 }
