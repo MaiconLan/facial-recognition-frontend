@@ -5,11 +5,12 @@ import {InputTextModule} from 'primeng/inputtext';
 import {PasswordModule} from 'primeng/password';
 import {ButtonModule} from 'primeng/button';
 import {FormsModule} from '@angular/forms';
-import {HttpClientModule} from '@angular/common/http';
+import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import {JwtModule} from '@auth0/angular-jwt';
 import {environment} from '../../environments/environment';
 import {AuthGuard} from './auth.guard';
 import {LogoutService} from './logout.service';
+import {HttpsRequestInterceptor} from './interceptor';
 
 export function tokenGetter(): string {
   return localStorage.getItem('token');
@@ -30,9 +31,17 @@ export function tokenGetter(): string {
         allowedDomains: environment.allowedDomains,
         disallowedRoutes: environment.disallowedRoutes
       }
-    })
+    }),
   ],
-  providers: [AuthGuard, LogoutService]
+  providers: [
+    AuthGuard,
+    LogoutService,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: HttpsRequestInterceptor,
+      multi: true
+    }
+  ]
 })
 export class SegurancaModule {
 }
