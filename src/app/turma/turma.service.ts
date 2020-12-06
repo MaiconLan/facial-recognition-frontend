@@ -115,11 +115,11 @@ export class TurmaService {
       });
   }
 
-  gerarRelatorio(filtro: ExportacaoFiltro): Promise<any> {
+  exportar(filtro: ExportacaoFiltro): Promise<any> {
     const headers = new HttpHeaders()
       .append('Content-Type', 'application/json');
 
-    return this.http.put<any>(`${this.url}/${filtro.idTurma}/exportacao?formato=${filtro.formato}`, {headers})
+    return this.http.put<any>(`${this.url}/${filtro.idTurma}/exportacao?formato=${filtro.formato}`, {headers}, {responseType: 'blob'})
       .toPromise()
       .then()
       .catch(error => {

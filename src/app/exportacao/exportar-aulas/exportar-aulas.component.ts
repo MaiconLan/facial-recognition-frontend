@@ -1,6 +1,8 @@
 import {Component, OnInit} from '@angular/core';
-import {TurmaFiltro, TurmaService} from "../../turma/turma.service";
+import {TurmaService} from "../../turma/turma.service";
 import {ErrorHandlerService} from "../../core/error-handler.service";
+import {DomSanitizer} from "@angular/platform-browser";
+import * as fileSaver from 'file-saver';
 
 export class ExportacaoFiltro {
   idTurma: string;
@@ -47,7 +49,25 @@ export class ExportarAulasComponent implements OnInit {
       });
   }
 
-  gerarRelatorio(): void {
-    this.turmaService.gerarRelatorio(this.filtro);
+  exportar(): void {
+    this.turmaService.exportar(this.filtro)
+      .then(response => {
+        this.download(response, this.filtro.formato);
+        this.handler.addSuccess('Sucesso', 'Gerado com sucesso');
+        console.log(response);
+      })
+      .catch(error => this.handler.handle(error));
+  }
+
+  download(response, formato): void {
+    let type;
+    if (formato === 'json'){
+      type = 'text/json; charset=utf-8';
+    } else if (formato === 'pdf') {
+      type = 'pdf/json; charset=utf-8';
+    }
+
+    const blob = new Blob([response], {type});
+    fileSaver.saveAs(blob, `presencas.${formato}`);
   }
 }
