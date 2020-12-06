@@ -1,11 +1,12 @@
-import { Injectable } from '@angular/core';
-import { HttpClient, HttpHandler } from '@angular/common/http';
+import {Injectable} from '@angular/core';
+import {HttpClient, HttpHandler} from '@angular/common/http';
 
-import { Observable, from as observableFromPromise } from 'rxjs';
+import {from as observableFromPromise, Observable} from 'rxjs';
 
-import { AuthService } from './auth.service';
+import {AuthService} from './auth.service';
 
-export class NotAuthenticatedError {}
+export class NotAuthenticatedError {
+}
 
 @Injectable()
 export class FacialHttp extends HttpClient {
@@ -43,6 +44,10 @@ export class FacialHttp extends HttpClient {
 
   public put<T>(url: string, body: any, options?: any): Observable<T> {
     return this.fazerRequisicao<T>(() => super.put<T>(url, body, options));
+  }
+
+  public getIdUsuario(): string {
+    return this.auth.getIdUsuario();
   }
 
   private fazerRequisicao<T>(fn: Function): Observable<T> {

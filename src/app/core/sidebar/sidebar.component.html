@@ -37,6 +37,10 @@
       </div>
 
       <div class="navbar-menuitem" routerLinkActive="ativo">
+        <a routerLink="/exportacao" *ngIf="mostrarBotaoMenu()" (click)="exibindoMenu = !exibindoMenu">Exportação</a>
+      </div>
+
+      <div class="navbar-menuitem" routerLinkActive="ativo">
         <a routerLink="#" (click)="logout()">Logout</a>
       </div>
 

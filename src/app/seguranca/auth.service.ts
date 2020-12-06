@@ -88,4 +88,8 @@ export class AuthService {
     this.jwtPayload = null;
   }
 
+  getIdUsuario(): string {
+    return this.jwtPayload?.idUsuario;
+  }
+
 }

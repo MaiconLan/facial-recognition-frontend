@@ -3,6 +3,7 @@ import {FacialHttp} from "../seguranca/facial-http";
 import {environment} from "../../environments/environment";
 import {HttpHeaders, HttpParams} from "@angular/common/http";
 import {Turma} from "../core/model";
+import {ExportacaoFiltro} from "../exportacao/exportar-aulas/exportar-aulas.component";
 
 export class TurmaFiltro {
   materia: string;
@@ -46,7 +47,19 @@ export class TurmaService {
       params = params.set('finalizada', String(filtro.finalizada));
     }
 
-    return this.http.get<any>(this.url, {headers, params})
+    return this.http.get<any>(`${this.url}/filtro`, {headers, params})
+      .toPromise()
+      .then()
+      .catch(error => {
+        return Promise.reject(error);
+      });
+  }
+
+  listar(): Promise<any> {
+    const headers = new HttpHeaders()
+      .append('Content-Type', 'application/json');
+
+    return this.http.get<any>(this.url, {headers})
       .toPromise()
       .then()
       .catch(error => {
@@ -95,6 +108,18 @@ export class TurmaService {
       .append('Content-Type', 'application/json');
 
     return this.http.delete<any>(`${this.url}/${id}`, {headers})
+      .toPromise()
+      .then()
+      .catch(error => {
+        return Promise.reject(error);
+      });
+  }
+
+  exportar(filtro: ExportacaoFiltro): Promise<any> {
+    const headers = new HttpHeaders()
+      .append('Content-Type', 'application/json');
+
+    return this.http.put<any>(`${this.url}/${filtro.idTurma}/exportacao?formato=${filtro.formato}`, {headers}, {responseType: 'blob'})
       .toPromise()
       .then()
       .catch(error => {

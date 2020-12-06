@@ -54,4 +54,16 @@ export class AulaService {
         return Promise.reject(error);
       });
   }
+
+  exportarAula(aula: any): Promise<void> {
+    const headers = new HttpHeaders()
+      .append('Content-Type', 'application/json');
+
+    return this.http.put<any>(`${this.url}/${aula.id}/exportacao`, {headers}, {responseType: 'blob'})
+      .toPromise()
+      .then()
+      .catch(error => {
+        return Promise.reject(error);
+      });
+  }
 }

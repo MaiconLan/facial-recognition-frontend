@@ -1,6 +1,9 @@
 <div class="container">
   <div class="p-grid">
     <div class="p-col-12 p-md-12 p-lg-12">
+      <a style="text-decoration: none" [routerLink]="urlTurma">Voltar</a>
+    </div>
+    <div class="p-col-12 p-md-12 p-lg-12">
       <h2>{{turma?.materia}}/{{turma?.ano}} - {{turma?.professor.nome}}</h2>
     </div>
     <div class="p-col-12 p-md-12 p-lg-12">
@@ -54,7 +57,7 @@
               [disabled]="f.invalid"></button>
       <button pButton icon="pi pi-times" type="button" class="p-button-danger" label="Excluir"
               (click)="excluirAula()" *ngIf="editando()"></button>
-      <button pButton icon="pi pi-user" type="button" class="p-button-help" label="Presenças"
+      <button pButton icon="pi pi-user" type="button" class="p-button-help" label="Acessar aula"
               style="float: right"
               (click)="acessarPresencas()" *ngIf="editando()"></button>
     </p-footer>
