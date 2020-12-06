@@ -1,6 +1,9 @@
 <div class="container">
   <div class="p-grid">
     <div class="p-col-12 p-md-12 p-lg-12">
+      <a style="text-decoration: none" [routerLink]="urlTurma">Voltar</a>
+    </div>
+    <div class="p-col-12 p-md-12 p-lg-12">
       <h2>{{aula?.title}} - {{aula?.date | date: 'dd/MM/yyy'}}</h2>
     </div>
     <div class="p-col-6 p-md-3 p-lg-2">
@@ -29,6 +32,10 @@
       <button pButton icon="pi pi-list" type="submit"
               class="p-button-warning p-button-rounded"
               label="Não reconhecidos" (click)="buscarNaoReconhecidos()"></button>
+    </div>
+    <div class="p-col-12 p-md-3 p-lg-3">
+        <button pButton icon="pi pi-file" class="p-button-success p-button-rounded" label="Exportar aula"
+                (click)="exportarAula()"></button>
     </div>
     <div class="p-col-12 p-md-6 p-lg-6">
       <canvas #canvas [hidden]="true"></canvas>

@@ -30,7 +30,7 @@ const routes: Routes = [
   {path: 'turma/:id/calendario', component: CalendarioComponent, canActivate: [AuthGuard]},
   {path: 'turma/novo', component: CadastroTurmaComponent, canActivate: [AuthGuard]},
   {path: 'turma/:id', component: CadastroTurmaComponent, canActivate: [AuthGuard]},
-  {path: 'aula/:id', component: AulaComponent, canActivate: [AuthGuard]},
+  {path: 'turma/:idTurma/aula/:idAula', component: AulaComponent, canActivate: [AuthGuard]},
   {path: 'exportacao', component: ExportacaoComponent, canActivate: [AuthGuard]},
   {path: 'exportacao/aula', component: ExportarAulasComponent, canActivate: [AuthGuard]},
   {path: 'pagina-nao-encontrada', component: PaginaNaoEncontradaComponent, canActivate: [AuthGuard]},

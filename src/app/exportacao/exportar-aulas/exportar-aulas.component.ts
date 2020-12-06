@@ -1,7 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {TurmaService} from "../../turma/turma.service";
 import {ErrorHandlerService} from "../../core/error-handler.service";
-import {DomSanitizer} from "@angular/platform-browser";
 import * as fileSaver from 'file-saver';
 
 export class ExportacaoFiltro {
@@ -54,14 +53,13 @@ export class ExportarAulasComponent implements OnInit {
       .then(response => {
         this.download(response, this.filtro.formato);
         this.handler.addSuccess('Sucesso', 'Gerado com sucesso');
-        console.log(response);
       })
       .catch(error => this.handler.handle(error));
   }
 
   download(response, formato): void {
     let type;
-    if (formato === 'json'){
+    if (formato === 'json') {
       type = 'text/json; charset=utf-8';
     } else if (formato === 'pdf') {
       type = 'pdf/json; charset=utf-8';

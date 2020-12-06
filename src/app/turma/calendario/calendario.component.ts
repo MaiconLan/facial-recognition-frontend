@@ -38,6 +38,7 @@ export class CalendarioComponent implements OnInit {
 
   idTurma: number;
   pt: any;
+  urlTurma: any;
 
   constructor(private calendarioService: CalendarioService,
               private turmaService: TurmaService,
@@ -50,6 +51,7 @@ export class CalendarioComponent implements OnInit {
 
   ngOnInit(): void {
     this.idTurma = this.rout.snapshot.params.id;
+    this.urlTurma = `/turma/${this.idTurma}`;
     this.getTurma();
     this.listarAulas();
     this.configure();
@@ -216,7 +218,7 @@ export class CalendarioComponent implements OnInit {
   }
 
   acessarPresencas(): void {
-    this.router.navigate(['/aula', this.aula.id]);
+    this.router.navigate(['turma', this.turma.idTurma, 'aula', this.aula.id]);
   }
 }
 

@@ -1,10 +1,11 @@
 import {Component, ElementRef, OnInit, Renderer2, ViewChild} from '@angular/core';
 import {Title} from "@angular/platform-browser";
-import {ActivatedRoute} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import {ErrorHandlerService} from "../../core/error-handler.service";
 import {AulaService} from "../aula.service";
 import {MessageService} from "primeng/api";
 import {AlunoService} from "../../aluno/aluno.service";
+import * as fileSaver from 'file-saver';
 
 @Component({
   selector: 'app-aula',
@@ -13,6 +14,7 @@ import {AlunoService} from "../../aluno/aluno.service";
 })
 export class AulaComponent implements OnInit {
 
+  idTurma: number;
   presencas = [];
   rostosNaoReconhecidos = [];
 
@@ -37,10 +39,12 @@ export class AulaComponent implements OnInit {
 
   @ViewChild('video', {static: true}) videoElement: ElementRef;
   @ViewChild('canvas', {static: true}) canvas: ElementRef;
+  urlTurma: any;
 
   constructor(private aulaService: AulaService,
               private messageService: MessageService,
               private alunoService: AlunoService,
+              private router: Router,
               private handler: ErrorHandlerService,
               private renderer: Renderer2,
               private title: Title,
@@ -48,10 +52,13 @@ export class AulaComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    const id = this.rout.snapshot.params.id;
+    const idAula = this.rout.snapshot.params.idAula;
+    this.idTurma = this.rout.snapshot.params.idTurma;
 
-    if (id) {
-      this.buscar(id);
+    this.urlTurma = `/turma/${this.idTurma}`;
+
+    if (idAula) {
+      this.buscar(idAula);
       this.carregarDropdownAlunos();
     }
 
@@ -155,4 +162,18 @@ export class AulaComponent implements OnInit {
         this.mostrarModalNaoReconhecidos = false;
       }).catch(error => this.handler.handle(error));
   }
+
+  exportarAula(): void {
+    this.aulaService.exportarAula(this.aula)
+      .then(response => {
+        this.download(response);
+        this.handler.addSuccess('Sucesso', 'Gerado com sucesso');
+      }).catch(error => this.handler.handle(error));
+  }
+
+  download(response): void {
+    const blob = new Blob([response], {type: 'pdf/json; charset=utf-8'});
+    fileSaver.saveAs(blob, `presencas.pdf`);
+  }
+
 }
