@@ -3,7 +3,7 @@ import {Title} from "@angular/platform-browser";
 import {ActivatedRoute, Router} from "@angular/router";
 import {ErrorHandlerService} from "../../core/error-handler.service";
 import {AulaService} from "../aula.service";
-import {MessageService} from "primeng/api";
+import {LazyLoadEvent, MessageService} from "primeng/api";
 import {AlunoService} from "../../aluno/aluno.service";
 import * as fileSaver from 'file-saver';
 
@@ -23,6 +23,7 @@ export class AulaComponent implements OnInit {
   mostrarModalNaoReconhecidos = false;
 
   alunos = [];
+  totalRegistros = 0;
 
   constraints = {
     video: {
@@ -40,6 +41,7 @@ export class AulaComponent implements OnInit {
   @ViewChild('video', {static: true}) videoElement: ElementRef;
   @ViewChild('canvas', {static: true}) canvas: ElementRef;
   urlTurma: any;
+  loading = false;
 
   constructor(private aulaService: AulaService,
               private messageService: MessageService,
@@ -66,9 +68,13 @@ export class AulaComponent implements OnInit {
   }
 
   buscar(id: number): void {
+    this.loading = true;
     this.aulaService.buscar(id).then(response => {
-      this.aula = response;
       this.title.setTitle('Aula');
+      this.aula = response;
+      this.totalRegistros = this.aula.presencas.length;
+      console.log(this.totalRegistros);
+      this.loading = false;
     }).catch(error => this.handler.handle(error));
   }
 
@@ -176,4 +182,8 @@ export class AulaComponent implements OnInit {
     fileSaver.saveAs(blob, `presencas.pdf`);
   }
 
+  aoMudarPagina(event: LazyLoadEvent): void {
+    const idAula = this.rout.snapshot.params.idAula;
+    this.buscar(idAula);
+  }
 }

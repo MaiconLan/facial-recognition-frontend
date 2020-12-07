@@ -19,7 +19,6 @@ export class LogoutService {
     return this.http.delete(this.tokensRevokeUrl, {withCredentials: true})
       .toPromise()
       .then(response => {
-        console.log('OK: ', response);
         this.auth.limparAcessToken();
       }).catch(error => {
         return error;

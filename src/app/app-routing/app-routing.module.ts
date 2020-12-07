@@ -15,6 +15,8 @@ import {DashboardComponent} from '../dashboard/dashboard.component';
 import {AulaComponent} from "../turma/aula/aula.component";
 import {ExportacaoComponent} from "../exportacao/exportacao/exportacao.component";
 import {ExportarAulasComponent} from "../exportacao/exportar-aulas/exportar-aulas.component";
+import {CadastroCoordenadorComponent} from "../coordenador/cadastro-coordenador/cadastro-coordenador.component";
+import {ListaCoordenadorComponent} from "../coordenador/lista-coordenador/lista-coordenador.component";
 
 const routes: Routes = [
   {path: '', redirectTo: 'login', pathMatch: 'full'},
@@ -26,6 +28,9 @@ const routes: Routes = [
   {path: 'professor', component: ListaProfessorComponent, canActivate: [AuthGuard]},
   {path: 'professor/novo', component: CadastroProfessorComponent, canActivate: [AuthGuard]},
   {path: 'professor/:id', component: CadastroProfessorComponent, canActivate: [AuthGuard]},
+  {path: 'coordenador', component: ListaCoordenadorComponent, canActivate: [AuthGuard]},
+  {path: 'coordenador/novo', component: CadastroCoordenadorComponent, canActivate: [AuthGuard]},
+  {path: 'coordenador/:id', component: CadastroCoordenadorComponent, canActivate: [AuthGuard]},
   {path: 'turma', component: ListaTurmaComponent, canActivate: [AuthGuard]},
   {path: 'turma/:id/calendario', component: CalendarioComponent, canActivate: [AuthGuard]},
   {path: 'turma/novo', component: CadastroTurmaComponent, canActivate: [AuthGuard]},

@@ -93,7 +93,7 @@ export class CadastroAlunoComponent implements OnInit {
   novo(form: NgForm): void {
     form.reset();
 
-    setTimeout(function (): void {
+    setTimeout(function(): void {
       this.aluno = new Aluno();
     }.bind(this), 1);
 
