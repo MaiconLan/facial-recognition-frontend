@@ -1,36 +1,92 @@
-import { Component, OnInit } from '@angular/core';
+import {Component} from '@angular/core';
+import {ProfessorFiltro, ProfessorService} from '../professor.service';
+import {ConfirmationService, LazyLoadEvent, MessageService} from 'primeng/api';
+import {ErrorHandlerService} from '../../core/error-handler.service';
+import {Title} from '@angular/platform-browser';
 
 @Component({
   selector: 'app-lista-professor',
   templateUrl: './lista-professor.component.html',
   styleUrls: ['./lista-professor.component.css']
 })
-export class ListaProfessorComponent implements OnInit {
+export class ListaProfessorComponent {
 
-  loading: boolean;
+  loading = false;
+  totalRegistros = 0;
+
+  filtro = new ProfessorFiltro();
 
   professores = [];
 
-  constructor() { }
-
-  ngOnInit(): void {
+  constructor(private professorService: ProfessorService,
+              private messageService: MessageService,
+              private confirmation: ConfirmationService,
+              private handler: ErrorHandlerService,
+              private title: Title) {
   }
 
-  async load(): Promise<void> {
+  ngOnInit(): void {
+    this.title.setTitle('Busca de professores');
+  }
+
+  consultar(pagina = 0): void {
+    this.filtro.pagina = pagina;
+
     this.loading = true;
-    await new Promise(resolve => setTimeout(resolve, 500));
-    this.buscarProfessores();
+    this.professorService.consultar(this.filtro)
+      .then(response => {
+        if (!response) {
+          this.cleanList();
+        } else {
+          this.totalRegistros = response.totalElements;
+          this.professores = response.content;
+        }
+      }).catch(error => {
+      this.handler.handle(error);
+      this.cleanList();
+    });
+
     this.loading = false;
   }
 
-  buscarProfessores(): void{
-    this.professores = [{ idProfessor: 1, idUsuario: 1, nome: 'Maicon Lanzendorf',  usuario: 'maicon.lanzendorf', senha: 'senha', email: 'email'},
-      { idProfessor: 2, idUsuario: 2, nome: 'Maicon Lanzendorf',  usuario: 'maicon.lanzendorf', senha: 'senha', email: 'email'},
-      { idProfessor: 3, idUsuario: 3, nome: 'Maicon Lanzendorf',  usuario: 'maicon.lanzendorf', senha: 'senha', email: 'email'},
-      { idProfessor: 4, idUsuario: 4, nome: 'Maicon Lanzendorf',  usuario: 'maicon.lanzendorf', senha: 'senha', email: 'email'},
-      { idProfessor: 5, idUsuario: 5, nome: 'Maicon Lanzendorf',  usuario: 'maicon.lanzendorf', senha: 'senha', email: 'email'},
-      { idProfessor: 6, idUsuario: 6, nome: 'Maicon Lanzendorf',  usuario: 'maicon.lanzendorf', senha: 'senha', email: 'email'},
-      { idProfessor: 7, idUsuario: 7, nome: 'Maicon Lanzendorf', matricula: '123456', usuario: 'maicon.lanzendorf', senha: 'senha', email: 'email'}];
+  private cleanList(): void {
+    this.totalRegistros = 0;
+    this.professores = [];
+  }
+
+  confirmarExclusao(professor: any): void {
+    this.confirmation.confirm({
+      icon: 'pi pi-info-circle',
+      header: 'Confirmar exclusão!',
+      message: 'Você tem certeza de que deseja excluir?',
+      accept: () => {
+        this.excluir(professor);
+      },
+      acceptLabel: 'Sim',
+      rejectLabel: 'Não',
+      acceptButtonStyleClass: 'p-button-info p-button-rounded',
+      rejectButtonStyleClass: 'botao-excluir p-button-danger p-button-rounded'
+    });
+  }
+
+  excluir(professor: any): void {
+    this.loading = true;
+    this.professorService.excluir(professor.idProfessor).then(() => {
+      this.consultar(this.filtro.pagina);
+      this.addSuccess('Sucesso', 'Registro excluído com sucesso');
+    }).catch(error => {
+      this.handler.handle(error);
+    });
+    this.loading = false;
+  }
+
+  aoMudarPagina(event: LazyLoadEvent): void {
+    const pagina = event.first / event.rows;
+    this.consultar(pagina);
+  }
+
+  addSuccess(title: string, message: string): void {
+    this.messageService.add({severity: 'success', summary: title, detail: message, life: 3000});
   }
 
 }
