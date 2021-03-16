@@ -36,6 +36,7 @@ import {CheckboxModule} from 'primeng/checkbox';
 import {FormsModule} from '@angular/forms';
 import {ExportacaoComponent} from './exportacao/exportacao/exportacao.component';
 import {DropdownModule} from "primeng/dropdown";
+import {CoordenadorModule} from "./coordenador/coordenador.module";
 
 @NgModule({
   declarations: [
@@ -77,6 +78,7 @@ import {DropdownModule} from "primeng/dropdown";
     CheckboxModule,
     FormsModule,
     DropdownModule,
+    CoordenadorModule,
   ],
   providers: [
     MessageService,

@@ -86,7 +86,7 @@ export class ListaTurmaComponent implements OnInit {
 
   private excluir(turma: any): void {
     this.turmaService.excluir(turma.idTurma).then(() => {
-      this.addSuccess('Excluío', 'Registro excluío com sucesso.');
+      this.addSuccess('Excluído', 'Registro excluído com sucesso.');
       this.consultar(this.filtro.pagina);
     }).catch(error => this.handler.handle(error));
   }

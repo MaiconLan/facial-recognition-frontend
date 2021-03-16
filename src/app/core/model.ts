@@ -1,5 +1,3 @@
-import {DatePipe, Time} from "@angular/common";
-
 export class Aluno {
   idAluno: number;
   nome: string;
@@ -18,6 +16,16 @@ export class Professor {
   usuario: string;
   senha: string;
   status = true;
+}
+
+export class Coordenador {
+  idCoordenador: number;
+  nome: string;
+  email: string;
+  usuario: string;
+  senha: string;
+  status = true;
+
 }
 
 export class Turma {
